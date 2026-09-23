@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Wedding Invitation 2.0 — Opening Handoff Overlay
+   Subtle Champagne-Gold Radial Warmth + Soft Ivory Light Veil
+   Duration: ~850ms total sequence
+   ========================================================================== */
+
+.opening-handoff-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 90;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle champagne-gold radial warmth rising from the parting center */
+.handoff-gold-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(245, 227, 169, 0.42) 0%,
+    rgba(212, 175, 55, 0.22) 32%,
+    rgba(197, 160, 89, 0.08) 60%,
+    transparent 80%
+  );
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.35s ease-out, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.handoff-gold-glow.active {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Soft warm-white / ivory light veil flooding in through the parted stationery */
+.handoff-white-veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    #ffffff 0%,
+    #faf7f2 60%,
+    #f5efe6 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.handoff-white-veil.active {
+  opacity: 0.95;
+}
+
+.handoff-white-veil.fading {
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}

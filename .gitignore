@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Diagnostic / Environment
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+
+# Editor / IDE
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+
+# Temporary test scripts and artifacts
+test_*.py
+test_*.png
+test_*.jpg
+test_*.webp
+*.tmp
+*.temp
+
+# Temporary screenshots and browser automation artifacts
+stitch_venue_screen.png
+browser/
+scratchpad_*.md
+.tempmediaStorage/

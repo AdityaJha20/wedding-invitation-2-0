@@ -1,0 +1,1732 @@
+/* ==========================================================================
+   Wedding Invitation 2.0 — Real Wedding UI Styles
+   Source of Truth: Stitch MCP Project 5588445424505447308
+   Mobile-First Architecture: 320px -> 430px -> 768px -> 1440px+
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Tokens & Color System
+   -------------------------------------------------------------------------- */
+:root {
+  --wedding-primary: #775a19;
+  --wedding-primary-container: #c5a059;
+  --wedding-primary-fixed: #ffdea5;
+  --wedding-on-primary: #ffffff;
+  --wedding-on-primary-container: #4e3700;
+  --wedding-secondary: #655d59;
+  --wedding-secondary-container: #ece0db;
+  --wedding-surface: #FAF7F2;
+  --wedding-surface-low: #F5EFE6;
+  --wedding-surface-container: #EFE8DC;
+  --wedding-on-surface: #231e1a;
+  --wedding-on-surface-variant: #5a5047;
+  --wedding-rose-gold: #E8B4B8;
+  --wedding-blush: #FDF2F4;
+  --wedding-deep-rose: #9A3B4D;
+  --wedding-gold-accent: #D4AF37;
+
+  --wedding-font-serif: 'Playfair Display', Georgia, serif;
+  --wedding-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Wedding Experience Container & Seamless Reveal
+   -------------------------------------------------------------------------- */
+.wedding-experience {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background-color: var(--wedding-surface);
+  background-image: 
+    radial-gradient(#d8ccb8 0.75px, transparent 0.75px), 
+    radial-gradient(#eedec9 0.75px, #FAF7F2 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.wedding-experience.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wedding-content-flow {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 72px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Persistent Minimal Music Control (Safe-Area Aware)
+   -------------------------------------------------------------------------- */
+.music-control-container {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  right: max(10px, env(safe-area-inset-right));
+  z-index: 50;
+  pointer-events: auto;
+}
+
+@media (min-width: 640px) {
+  .music-control-container {
+    top: max(18px, env(safe-area-inset-top));
+    right: max(20px, env(safe-area-inset-right));
+  }
+}
+
+.music-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(250, 247, 242, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  box-shadow: 0 4px 16px rgba(119, 90, 25, 0.1);
+  font-family: var(--wedding-font-sans);
+  max-width: calc(100vw - 20px);
+}
+
+@media (min-width: 640px) {
+  .music-pill {
+    gap: 8px;
+    padding: 6px 14px;
+  }
+}
+
+.music-note-icon {
+  font-size: 13px !important;
+  color: var(--wedding-primary);
+  flex-shrink: 0;
+  animation: pulseMusic 2.4s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+  .music-note-icon {
+    font-size: 15px !important;
+  }
+}
+
+@keyframes pulseMusic {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.music-song-name {
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--wedding-on-surface-variant);
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 480px) {
+  .music-song-name {
+    font-size: 10px;
+    max-width: 160px;
+  }
+}
+
+@media (min-width: 640px) {
+  .music-song-name {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    max-width: none;
+  }
+}
+
+.music-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: var(--wedding-surface);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: 9999px;
+  padding: 2px 6px;
+  color: var(--wedding-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.music-toggle-btn:hover {
+  background: var(--wedding-secondary-container);
+  border-color: var(--wedding-primary-container);
+}
+
+.music-state-icon {
+  font-size: 12px !important;
+}
+
+.music-toggle-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 640px) {
+  .music-toggle-btn {
+    padding: 3px 8px;
+    gap: 4px;
+  }
+  .music-state-icon {
+    font-size: 14px !important;
+  }
+  .music-toggle-label {
+    font-size: 10px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section (Mobile-First Layout)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding-top: max(76px, calc(env(safe-area-inset-top) + 64px));
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .hero-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero-section {
+    padding-top: max(88px, calc(env(safe-area-inset-top) + 72px));
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    padding-top: max(100px, calc(env(safe-area-inset-top) + 80px));
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 72px;
+  }
+}
+
+/* Ambient glow auras behind hero */
+.hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.hero-glow-1 {
+  width: min(600px, 85vw);
+  height: min(600px, 85vw);
+  background: rgba(232, 180, 184, 0.16);
+  top: -40px;
+}
+
+.hero-glow-2 {
+  width: min(500px, 75vw);
+  height: min(500px, 75vw);
+  background: rgba(197, 160, 89, 0.14);
+  top: 140px;
+  right: 5%;
+}
+
+/* Folio Card */
+.folio-card {
+  position: relative;
+  width: 100%;
+  max-width: 1024px;
+  background-color: var(--wedding-surface-low);
+  border-radius: 24px;
+  padding: 28px 12px 24px;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: 
+    0 10px 35px -5px rgba(78, 55, 0, 0.08),
+    0 24px 60px -10px rgba(154, 59, 77, 0.12);
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .folio-card {
+    padding: 32px 18px 28px;
+    border-radius: 28px;
+  }
+}
+
+@media (min-width: 640px) {
+  .folio-card {
+    padding: 48px 36px 44px;
+    border-radius: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .folio-card {
+    padding: 64px 56px;
+  }
+}
+
+/* Inner Gold Inset Emboss Border */
+.folio-embossed-border {
+  position: absolute;
+  inset: 8px;
+  border-radius: 18px;
+  pointer-events: none;
+  box-shadow: 
+    0 0 0 1px rgba(197, 160, 89, 0.4), 
+    inset 0 0 0 2px rgba(255, 255, 255, 0.9), 
+    inset 0 0 0 4px rgba(197, 160, 89, 0.25);
+}
+
+@media (min-width: 640px) {
+  .folio-embossed-border {
+    inset: 16px;
+    border-radius: 24px;
+  }
+}
+
+.folio-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 1. Auspicious Shlok Row */
+.auspicious-greeting-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-wrap: nowrap;
+}
+
+@media (min-width: 640px) {
+  .auspicious-greeting-row {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+}
+
+.gold-hairline-rule {
+  display: inline-block;
+  width: clamp(16px, 5vw, 32px);
+  height: 1px;
+}
+
+@media (min-width: 640px) {
+  .gold-hairline-rule {
+    width: 64px;
+  }
+}
+
+.rule-left {
+  background: linear-gradient(to right, transparent, var(--wedding-primary-container), transparent);
+}
+
+.rule-right {
+  background: linear-gradient(to left, transparent, var(--wedding-primary-container), transparent);
+}
+
+.auspicious-icon {
+  font-size: 14px !important;
+  color: var(--wedding-primary);
+}
+
+@media (min-width: 640px) {
+  .auspicious-icon {
+    font-size: 18px !important;
+  }
+}
+
+.auspicious-shlok {
+  font-family: var(--wedding-font-sans);
+  font-size: clamp(9px, 2.4vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--wedding-primary);
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .auspicious-shlok {
+    font-size: 12px;
+    letter-spacing: 0.28em;
+  }
+}
+
+/* 2. Welcoming Quote */
+.hero-quote {
+  font-family: var(--wedding-font-serif);
+  font-size: clamp(14px, 3.4vw, 20px);
+  font-style: italic;
+  color: var(--wedding-deep-rose);
+  max-width: 680px;
+  line-height: 1.45;
+  margin: 0 auto 20px;
+  padding: 0 4px;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .hero-quote {
+    margin-bottom: 26px;
+    padding: 0 8px;
+    line-height: 1.5;
+  }
+}
+
+/* 3. Royal Ornate MS Crest (Single ornate crest with no circular ring or disc) */
+.hero-crest-container {
+  position: relative;
+  margin-bottom: 14px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 640px) {
+  .hero-crest-container {
+    margin-bottom: 18px;
+  }
+}
+
+.hero-crest-container:hover,
+.hero-crest-container:focus-visible {
+  transform: scale(1.035) translateY(-2px);
+}
+
+.hero-crest-img {
+  width: clamp(120px, 30vw, 185px);
+  height: clamp(120px, 30vw, 185px);
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(119, 90, 25, 0.18));
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.hero-crest-container:hover .hero-crest-img,
+.hero-crest-container:focus-visible .hero-crest-img {
+  filter: drop-shadow(0 10px 26px rgba(197, 160, 89, 0.42));
+}
+
+/* 4. Couple Names Headline */
+.couple-names-headline {
+  font-family: var(--wedding-font-serif);
+  font-size: clamp(28px, 7.8vw, 68px);
+  font-weight: 400;
+  color: var(--wedding-primary);
+  letter-spacing: 0.02em;
+  line-height: 1.18;
+  margin-bottom: 6px;
+  text-wrap: balance;
+}
+
+.ampersand-accent {
+  font-family: var(--wedding-font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.85em;
+  color: var(--wedding-deep-rose);
+  padding: 0 4px;
+}
+
+/* 5. Wedding Subtitle */
+.wedding-subtitle {
+  font-family: var(--wedding-font-sans);
+  font-size: clamp(9px, 2.3vw, 13px);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--wedding-secondary);
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-wrap: balance;
+  line-height: 1.5;
+  padding: 0 4px;
+}
+
+@media (min-width: 640px) {
+  .wedding-subtitle {
+    letter-spacing: 0.24em;
+    margin-bottom: 28px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Couple Artwork Frame (Mobile-First Natural Document Flow)
+   - Mobile (< 640px): Overlay sits in natural document flow beneath image.
+     Faces and royal attire are 100% visible and unblocked.
+   - Desktop (>= 640px): Semi-transparent gradient overlay at bottom.
+   -------------------------------------------------------------------------- */
+.couple-artwork-frame {
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 36px rgba(68, 50, 15, 0.12);
+  border: 2px solid rgba(197, 160, 89, 0.4);
+  background: var(--wedding-surface);
+  transition: transform 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .couple-artwork-frame {
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(68, 50, 15, 0.14);
+  }
+}
+
+.couple-artwork-frame:hover {
+  transform: scale(1.008);
+}
+
+.couple-artwork-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/10;
+  transition: transform 0.8s ease;
+}
+
+.couple-artwork-frame:hover .couple-artwork-img {
+  transform: scale(1.015);
+}
+
+/* On mobile: natural document flow card footer beneath the image */
+.couple-artwork-overlay {
+  position: relative;
+  background: #231e1a;
+  padding: 16px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
+  color: #ffffff;
+  border-top: 1px solid rgba(197, 160, 89, 0.25);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .couple-artwork-overlay {
+    position: absolute;
+    inset-x: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(35, 30, 26, 0.90) 0%, rgba(35, 30, 26, 0.35) 60%, transparent 100%);
+    padding: 28px 28px 24px;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    text-align: left;
+    border-top: none;
+  }
+}
+
+.union-badge {
+  display: inline-block;
+  font-family: var(--wedding-font-sans);
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--wedding-primary-fixed);
+  background: rgba(119, 90, 25, 0.85);
+  padding: 3px 9px;
+  border-radius: 9999px;
+  margin-bottom: 4px;
+}
+
+@media (min-width: 640px) {
+  .union-badge {
+    font-size: 10px;
+    padding: 3px 10px;
+    margin-bottom: 8px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
+
+.overlay-quote {
+  font-family: var(--wedding-font-serif);
+  font-size: clamp(13px, 3.2vw, 21px);
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1.4;
+  margin: 0;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .overlay-quote {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.shower-petals-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: center;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  background: rgba(250, 247, 242, 0.94);
+  color: var(--wedding-primary);
+  font-family: var(--wedding-font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  min-height: 38px;
+}
+
+@media (min-width: 640px) {
+  .shower-petals-btn {
+    align-self: flex-end;
+    padding: 8px 16px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+.shower-petals-btn:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.shower-icon {
+  font-size: 14px !important;
+  color: var(--wedding-deep-rose);
+}
+
+@media (min-width: 640px) {
+  .shower-icon {
+    font-size: 16px !important;
+  }
+}
+
+/* 7. Hero Primary CTA */
+.hero-cta-group {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .hero-cta-group {
+    margin-top: 32px;
+  }
+}
+
+.hero-primary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: min(100%, 300px);
+  min-height: 46px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--wedding-primary);
+  color: var(--wedding-on-primary);
+  font-family: var(--wedding-font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(119, 90, 25, 0.28);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .hero-primary-cta {
+    width: auto;
+    padding: 14px 28px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+  }
+}
+
+.hero-primary-cta:hover {
+  background: var(--wedding-deep-rose);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(154, 59, 77, 0.32);
+}
+
+.cta-icon {
+  font-size: 17px !important;
+  color: var(--wedding-primary-fixed);
+}
+
+/* --------------------------------------------------------------------------
+   Scratch Date Section (Mobile-First Architecture)
+   -------------------------------------------------------------------------- */
+.scratch-section {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding: 48px 12px 64px;
+  background-color: var(--wedding-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  .scratch-section {
+    padding: 72px 24px 88px;
+  }
+}
+
+.scratch-inner-container {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Header badge */
+.scratch-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: var(--wedding-blush);
+  border: 1px solid rgba(154, 59, 77, 0.2);
+  color: var(--wedding-deep-rose);
+  margin-bottom: 10px;
+}
+
+.badge-heart-icon {
+  font-size: 14px !important;
+}
+
+.badge-text {
+  font-family: var(--wedding-font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+}
+
+@media (min-width: 640px) {
+  .badge-text {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+}
+
+.scratch-heading {
+  font-family: var(--wedding-font-serif);
+  font-size: clamp(24px, 5.8vw, 44px);
+  font-weight: 400;
+  color: var(--wedding-primary);
+  margin-bottom: 10px;
+  line-height: 1.25;
+  text-wrap: balance;
+  padding: 0 4px;
+}
+
+.scratch-subheading {
+  font-family: var(--wedding-font-serif);
+  font-size: clamp(13px, 3.2vw, 17px);
+  font-style: italic;
+  color: var(--wedding-secondary);
+  max-width: 520px;
+  line-height: 1.45;
+  margin: 0 auto 24px;
+  padding: 0 6px;
+  text-wrap: balance;
+}
+
+/* Mount Card */
+.scratch-mount-card {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  background-color: var(--wedding-surface-low);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 24px;
+  padding: 24px 12px 28px;
+  box-shadow: 0 12px 40px rgba(119, 90, 25, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .scratch-mount-card {
+    padding: 40px 32px;
+    border-radius: 36px;
+  }
+}
+
+/* Golden Heart Interactive Frame
+   - Uses scalable SVG objectBoundingBox clip-path (#wedding-heart-clip)
+   - Seamlessly fits from 250px up to 360px without touching container edges
+   - Zero horizontal overflow guarantee
+   -------------------------------------------------------------------------- */
+.heart-interactive-frame {
+  position: relative;
+  width: clamp(250px, 78vw, 360px);
+  height: calc(clamp(250px, 78vw, 360px) * 0.906);
+  clip-path: url(#wedding-heart-clip);
+  -webkit-clip-path: url(#wedding-heart-clip);
+  background: linear-gradient(135deg, #fcf7ec 0%, #FFF3D6 50%, #F5E6C4 100%);
+  box-shadow: 0 16px 38px rgba(119, 90, 25, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Underneath Revealed Content */
+.heart-revealed-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(14px, 3.8vw, 24px);
+  user-select: none;
+  background: linear-gradient(to bottom, #FFFDF9 0%, #FAF3E7 50%, #F5ECE0 100%);
+  box-sizing: border-box;
+}
+
+.calendar-icon-disc {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(154, 59, 77, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wedding-deep-rose);
+  margin-bottom: 4px;
+}
+
+@media (min-width: 640px) {
+  .calendar-icon-disc {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 6px;
+  }
+}
+
+.calendar-glyph {
+  font-size: 19px !important;
+}
+
+@media (min-width: 640px) {
+  .calendar-glyph {
+    font-size: 22px !important;
+  }
+}
+
+.revealed-save-date {
+  font-family: var(--wedding-font-sans);
+  font-size: clamp(9.5px, 2.4vw, 11px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--wedding-deep-rose);
+  margin-bottom: 3px;
+}
+
+.revealed-wedding-date {
+  font-family: var(--wedding-font-serif);
+  font-size: clamp(21px, 5.2vw, 32px);
+  font-weight: 700;
+  color: var(--wedding-primary);
+  letter-spacing: 0.04em;
+  margin: 2px 0 4px;
+  line-height: 1.15;
+}
+
+.revealed-couple-names {
+  font-family: var(--wedding-font-serif);
+  font-size: clamp(13px, 3.4vw, 15px);
+  font-weight: 600;
+  color: var(--wedding-on-surface);
+}
+
+/* Scratch Canvas */
+.heart-scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+  z-index: 20;
+  transition: opacity 0.7s ease;
+}
+
+.heart-scratch-canvas.revealed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Action Bar below Heart */
+.scratch-action-bar {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .scratch-action-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 22px;
+  }
+}
+
+.scratch-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--wedding-font-sans);
+  font-size: 11px;
+  color: var(--wedding-secondary);
+}
+
+@media (min-width: 640px) {
+  .scratch-hint {
+    font-size: 12px;
+  }
+}
+
+.hint-icon {
+  font-size: 16px !important;
+  color: var(--wedding-primary);
+}
+
+.quick-reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: var(--wedding-surface);
+  color: var(--wedding-primary);
+  font-family: var(--wedding-font-sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+  min-height: 40px;
+}
+
+@media (min-width: 640px) {
+  .quick-reveal-btn {
+    padding: 8px 16px;
+    font-size: 11px;
+  }
+}
+
+.quick-reveal-btn:hover {
+  background: var(--wedding-secondary-container);
+  border-color: var(--wedding-primary-container);
+  transform: translateY(-1px);
+}
+
+.reveal-btn-icon {
+  font-size: 15px !important;
+  color: var(--wedding-deep-rose);
+}
+
+/* Joyful Mubarak Celebration Banner */
+.scratch-celebration-banner {
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background-color: var(--wedding-blush);
+  border: 1px solid var(--wedding-rose-gold);
+  color: var(--wedding-deep-rose);
+  font-family: var(--wedding-font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+  width: 100%;
+  max-width: 440px;
+  text-wrap: balance;
+  box-sizing: border-box;
+  animation: bannerFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 640px) {
+  .scratch-celebration-banner {
+    padding: 14px 20px;
+    font-size: 13px;
+  }
+}
+
+@keyframes bannerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Venue & Wedding Dates Section (Stitch Design Specification)
+   ========================================================================== */
+
+.venue-celebration-section {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 32px 16px 48px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 640px) {
+  .venue-celebration-section {
+    padding: 48px 24px 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .venue-celebration-section {
+    padding: 56px 32px 72px;
+  }
+}
+
+/* 1. Traditional Sanskrit Blessing Motif */
+.venue-blessing-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  opacity: 0.85;
+  margin-bottom: 12px;
+}
+
+.blessing-rule {
+  width: 36px;
+  height: 1px;
+  background-color: var(--wedding-primary-container);
+}
+
+@media (min-width: 640px) {
+  .blessing-rule {
+    width: 60px;
+  }
+}
+
+.blessing-text {
+  font-family: var(--wedding-font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--wedding-primary);
+}
+
+/* 2. Header Section: Clean, warm, romantic heading */
+.venue-title-group {
+  max-width: 820px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+  .venue-title-group {
+    margin-bottom: 32px;
+  }
+}
+
+.venue-tagline {
+  font-family: var(--wedding-font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--wedding-primary);
+  margin-bottom: 8px;
+}
+
+.venue-main-heading {
+  font-family: var(--wedding-font-serif);
+  font-size: clamp(26px, 5.5vw, 42px);
+  font-weight: 500;
+  color: var(--wedding-on-surface);
+  line-height: 1.22;
+  margin: 0 0 10px;
+  letter-spacing: 0.015em;
+  text-wrap: balance;
+}
+
+.venue-romantic-line {
+  font-family: var(--wedding-font-serif);
+  font-style: italic;
+  font-size: clamp(14.5px, 2.8vw, 18px);
+  line-height: 1.5;
+  color: var(--wedding-secondary);
+  margin: 0;
+  max-width: 600px;
+  text-wrap: balance;
+}
+
+/* 3. Hotel Facade Keepsake Card */
+.venue-facade-container {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+@media (min-width: 640px) {
+  .venue-facade-container {
+    margin-bottom: 36px;
+  }
+}
+
+.venue-facade-outer-frame {
+  width: 100%;
+  position: relative;
+  padding: 8px;
+  border-radius: 20px;
+  background-color: var(--wedding-surface-low);
+  box-shadow: 0 12px 40px rgba(44, 38, 35, 0.08);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .venue-facade-outer-frame {
+    padding: 14px;
+    border-radius: 24px;
+  }
+}
+
+.venue-facade-inner-canvas {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  background-color: #ffffff;
+  padding: 6px;
+  box-shadow: inset 0 0 24px rgba(197, 160, 89, 0.09);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .venue-facade-inner-canvas {
+    border-radius: 16px;
+    padding: 12px;
+  }
+}
+
+/* Botanical Corner Flourishes */
+.facade-corner-accent {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: 2;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .facade-corner-accent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.corner-top-left {
+  top: 4px;
+  left: 4px;
+}
+
+.corner-top-right {
+  top: 4px;
+  right: 4px;
+  transform: rotate(90deg);
+}
+
+.corner-flourish-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 1px 2px rgba(119, 90, 25, 0.1));
+}
+
+/* Artwork Canvas Container */
+.facade-artwork-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
+  background-color: #fbf9f6;
+}
+
+@media (min-width: 640px) {
+  .facade-artwork-wrap {
+    aspect-ratio: 21 / 10;
+    border-radius: 12px;
+  }
+}
+
+.facade-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.facade-artwork-wrap:hover .facade-image {
+  transform: scale(1.02);
+}
+
+.facade-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 16, 14, 0.45) 0%, rgba(20, 16, 14, 0.1) 25%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Floating Venue Badge */
+.venue-floating-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  z-index: 3;
+}
+
+@media (min-width: 640px) {
+  .venue-floating-badge {
+    bottom: 16px;
+    left: 20px;
+    padding: 8px 18px;
+    gap: 8px;
+  }
+}
+
+.venue-pin-icon {
+  font-size: 17px !important;
+  color: var(--wedding-primary);
+}
+
+@media (min-width: 640px) {
+  .venue-pin-icon {
+    font-size: 19px !important;
+  }
+}
+
+.venue-badge-text {
+  font-family: var(--wedding-font-serif);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--wedding-on-surface);
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 640px) {
+  .venue-badge-text {
+    font-size: 14.5px;
+  }
+}
+
+/* 4. Wedding Celebration Schedule (Itinerary Card) */
+.venue-itinerary-container {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.venue-itinerary-card {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid rgba(197, 160, 89, 0.38);
+  border-radius: 20px;
+  padding: 24px 16px;
+  box-shadow: 0 10px 32px rgba(44, 38, 35, 0.06);
+  position: relative;
+  text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+  .venue-itinerary-card {
+    border-radius: 24px;
+    padding: 36px 36px;
+    margin-bottom: 32px;
+  }
+}
+
+.itinerary-sparkle-monogram {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background-color: var(--wedding-secondary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.itinerary-sparkle-icon {
+  font-size: 20px !important;
+  color: var(--wedding-primary);
+}
+
+.itinerary-card-title {
+  font-family: var(--wedding-font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--wedding-primary);
+  font-weight: 700;
+  margin: 0 0 20px;
+}
+
+/* Two-Day Grid Layout */
+.itinerary-days-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .itinerary-days-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+.day-schedule-card {
+  padding: 16px 16px;
+  border-radius: 14px;
+  background-color: rgba(245, 239, 230, 0.65);
+  border: 1px solid rgba(209, 197, 180, 0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .day-schedule-card {
+    padding: 20px 22px;
+  }
+}
+
+.day-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(209, 197, 180, 0.5);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+.day-date-number {
+  font-family: var(--wedding-font-serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--wedding-primary);
+  line-height: 1;
+}
+
+@media (min-width: 640px) {
+  .day-date-number {
+    font-size: 28px;
+  }
+}
+
+.day-month-year {
+  font-family: var(--wedding-font-sans);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--wedding-secondary);
+}
+
+.day-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--wedding-font-sans);
+}
+
+.day-event-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.event-time-slot {
+  font-size: 13px;
+  color: var(--wedding-secondary);
+  font-weight: 500;
+}
+
+.event-name {
+  font-family: var(--wedding-font-serif);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--wedding-on-surface);
+  letter-spacing: 0.015em;
+}
+
+@media (min-width: 640px) {
+  .event-name {
+    font-size: 15.5px;
+  }
+}
+
+.main-function-highlight {
+  color: var(--wedding-primary);
+  font-weight: 700;
+}
+
+.event-divider {
+  height: 1px;
+  background-color: rgba(209, 197, 180, 0.4);
+  width: 100%;
+}
+
+.itinerary-blessing-note {
+  font-family: var(--wedding-font-serif);
+  font-style: italic;
+  font-size: clamp(13px, 2.5vw, 15px);
+  color: var(--wedding-secondary);
+  margin: 20px 0 0;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+/* 5. Primary Location Button & Calendar Actions */
+.venue-actions-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.venue-map-cta-btn {
+  width: 100%;
+  max-width: 360px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  min-height: 48px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #c5a059 0%, #d4af37 50%, #b88f42 100%);
+  color: #ffffff;
+  font-family: var(--wedding-font-sans);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(197, 160, 89, 0.45);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .venue-map-cta-btn {
+    width: auto;
+    max-width: none;
+    padding: 16px 36px;
+    font-size: 13px;
+  }
+}
+
+.venue-map-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(197, 160, 89, 0.6);
+  background: linear-gradient(135deg, #b88f42 0%, #c5a059 50%, #775a19 100%);
+}
+
+.venue-map-cta-btn:focus-visible {
+  outline: 2px solid var(--wedding-primary);
+  outline-offset: 3px;
+}
+
+.map-btn-icon {
+  font-size: 20px !important;
+  color: #ffffff;
+}
+
+/* 6. Calendar Action: Book that date in your calendar */
+.calendar-action-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-invite-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 18px;
+  min-height: 44px;
+  border-radius: 9999px;
+  background-color: rgba(239, 232, 220, 0.7);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: var(--wedding-on-surface);
+  font-family: var(--wedding-font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .calendar-invite-btn {
+    padding: 10px 22px;
+    font-size: 12px;
+  }
+}
+
+.calendar-invite-btn:hover {
+  background-color: var(--wedding-secondary-container);
+  border-color: var(--wedding-primary-container);
+  transform: translateY(-1px);
+}
+
+.cal-btn-icon {
+  font-size: 17px !important;
+  color: var(--wedding-primary);
+}
+
+.cal-chevron-icon {
+  font-size: 16px !important;
+  color: var(--wedding-secondary);
+}
+
+.calendar-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  width: 220px;
+  background: #ffffff;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(44, 38, 35, 0.14);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: bannerFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cal-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-family: var(--wedding-font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--wedding-on-surface);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.cal-menu-item:hover {
+  background-color: var(--wedding-surface-low);
+  color: var(--wedding-primary);
+}
+
+.cal-item-icon {
+  font-size: 16px !important;
+  color: var(--wedding-primary);
+}
+
+/* 7. Subtle Monogram Sign-off */
+.venue-footer-signoff {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .venue-footer-signoff {
+    margin-top: 56px;
+  }
+}
+
+.signoff-monogram-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.signoff-rule {
+  width: 44px;
+  height: 1px;
+  background-color: rgba(197, 160, 89, 0.45);
+}
+
+@media (min-width: 640px) {
+  .signoff-rule {
+    width: 64px;
+  }
+}
+
+.signoff-monogram {
+  font-family: var(--wedding-font-serif);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--wedding-primary);
+  letter-spacing: 0.08em;
+}
+
+.signoff-blessing {
+  font-family: var(--wedding-font-sans);
+  font-size: 12px;
+  color: var(--wedding-on-surface-variant);
+  margin: 0 0 4px;
+  letter-spacing: 0.02em;
+}
+
+.signoff-location {
+  font-family: var(--wedding-font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--wedding-primary);
+  font-weight: 600;
+  margin: 0;
+}
+

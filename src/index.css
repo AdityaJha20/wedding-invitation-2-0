@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Wedding Invitation 2.0 — Global Styles
+   Warm Ivory & Soft White Luxury Bridal Wedding Card Palette
+   ========================================================================== */
+
+:root {
+  --color-bg-neutral: #f6f2ea;
+  --color-ivory-light: #fdfcf9;
+  --color-ivory-base: #f7f3eb;
+  --color-ivory-warm: #efe8dc;
+  --color-ivory-deep: #e2d8c7;
+  --color-ivory-shadow: rgba(135, 115, 90, 0.16);
+  --color-gold-champagne: #dfbe88;
+  --color-gold-royal: #c49e60;
+  --color-paper-shadow: rgba(60, 45, 30, 0.12);
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-bg-neutral);
+  color: #2b2520;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Application Container */
+.app-container,
+.app-viewport {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #faf7f2;
+}

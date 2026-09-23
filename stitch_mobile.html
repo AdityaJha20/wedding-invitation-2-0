@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_standard" name="shell-type"/>
+<title>Manya &amp; Sarthak — The Wedding Celebration</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+    
+    /* Subtle paper texture background feel */
+    .bg-stationery {
+      background-color: #FAF7F2;
+      background-image: radial-gradient(#d8ccb8 0.75px, transparent 0.75px), radial-gradient(#eedec9 0.75px, #FAF7F2 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+
+    /* Floating Petals CSS Animation */
+    .petal-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 40;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      background: radial-gradient(circle at 30% 30%, #fecdd3, #f43f5e 80%);
+      opacity: 0.75;
+      border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+      animation: drift linear infinite;
+    }
+    .petal.jasmine {
+      background: radial-gradient(circle at 40% 40%, #ffffff, #fef08a 85%);
+      border-radius: 50% 50% 50% 50%;
+      box-shadow: 0 2px 5px rgba(234,179,8,0.2);
+    }
+    .petal.marigold {
+      background: radial-gradient(circle at 30% 30%, #fde047, #ea580c 90%);
+      border-radius: 70% 30% 70% 30%;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateY(-5vh) translateX(0) rotate(0deg) scale(0.9);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(105vh) translateX(90px) rotate(360deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* Heart Shape Mask for Scratch Interaction */
+    .heart-mask-box {
+      width: 320px;
+      height: 290px;
+      clip-path: path('M 160,280 C 160,280 20,185 20,105 C 20,40 70,15 118,15 C 145,15 158,35 160,45 C 162,35 175,15 202,15 C 250,15 300,40 300,105 C 300,185 160,280 160,280 Z');
+    }
+    @media (min-width: 640px) {
+      .heart-mask-box {
+        width: 380px;
+        height: 340px;
+        clip-path: path('M 190,330 C 190,330 25,220 25,125 C 25,50 85,20 140,20 C 172,20 188,42 190,54 C 192,42 208,20 240,20 C 295,20 355,50 355,125 C 355,220 190,330 190,330 Z');
+      }
+    }
+
+    /* Gold foil shimmer */
+    .gold-foil-shine {
+      background: linear-gradient(135deg, #d4af37 0%, #f6e6b4 30%, #aa7c11 50%, #fcedbb 70%, #d4af37 100%);
+      background-size: 200% 200%;
+      animation: shimmerGold 6s ease infinite;
+    }
+    @keyframes shimmerGold {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .embossed-border {
+      box-shadow: 0 0 0 1px rgba(197, 160, 89, 0.4), inset 0 0 0 2px rgba(255, 255, 255, 0.9), inset 0 0 0 4px rgba(197, 160, 89, 0.25);
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#775a19",
+            "primary-container": "#c5a059",
+            "primary-fixed": "#ffdea5",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#4e3700",
+            "secondary": "#655d59",
+            "secondary-container": "#ece0db",
+            "tertiary": "#226866",
+            "tertiary-container": "#6fb1ae",
+            "surface": "#FAF7F2",
+            "surface-container-low": "#F5EFE6",
+            "surface-container": "#EFE8DC",
+            "surface-container-high": "#E7DFD2",
+            "surface-container-highest": "#DFD6C8",
+            "on-surface": "#231e1a",
+            "on-surface-variant": "#5a5047",
+            "rose-gold": "#E8B4B8",
+            "blush": "#FDF2F4",
+            "deep-rose": "#9A3B4D",
+            "gold-accent": "#D4AF37"
+          },
+          fontFamily: {
+            "headline-lg": ["Playfair Display", "serif"],
+            "headline-md": ["Playfair Display", "serif"],
+            "headline-sm": ["Playfair Display", "serif"],
+            "display-lg": ["Playfair Display", "serif"],
+            "display-md": ["Playfair Display", "serif"],
+            "quote-italic": ["Playfair Display", "serif"],
+            "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "body-md": ["Plus Jakarta Sans", "sans-serif"],
+            "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "label-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "label-md": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-stationery font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container relative min-h-screen">
+<!-- Ambient Floating Petals Canvas / Layer -->
+<div class="petal-container" id="petalContainer"></div>
+<!-- FIXED NAVIGATION BAR -->
+<header class="fixed top-0 inset-x-0 z-50 pointer-events-none">
+<div class="h-20 max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
+<!-- Monogram Pill -->
+<div class="pointer-events-auto flex items-center gap-3 bg-surface-container-low/95 backdrop-blur-md px-4 py-1.5 rounded-full border border-primary-container/30 shadow-[0_4px_16px_rgba(119,90,25,0.08)]">
+<span class="font-headline-md text-lg tracking-wider text-primary font-bold">M &amp; S</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>
+<button aria-label="Ambient Shehnai and Sitar Music Toggle" class="group flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface hover:bg-secondary-container transition-all border border-primary-container/20" id="shehnaiBtn" type="button">
+<span class="material-symbols-outlined text-primary text-[15px] animate-pulse">music_note</span>
+<span class="font-label-sm text-[11px] uppercase tracking-widest text-on-surface-variant font-medium">Shehnai Melodies</span>
+<span class="material-symbols-outlined text-primary text-[14px]" id="musicIcon">play_arrow</span>
+</button>
+</div>
+<!-- Nav Links -->
+<nav class="pointer-events-auto hidden md:flex items-center gap-1 bg-surface-container-low/95 backdrop-blur-md p-1.5 rounded-full border border-primary-container/30 shadow-[0_4px_16px_rgba(119,90,25,0.08)]">
+<a class="px-4 py-1.5 rounded-full font-label-md text-xs font-semibold bg-primary text-on-primary shadow-sm tracking-wider uppercase" href="#our-story">Our Story</a>
+<a class="px-4 py-1.5 rounded-full font-label-md text-xs font-medium text-on-surface-variant hover:text-primary hover:bg-surface transition-all tracking-wider uppercase" href="#scratch-card">Save Date</a>
+<a class="px-4 py-1.5 rounded-full font-label-md text-xs font-medium text-on-surface-variant hover:text-primary hover:bg-surface transition-all tracking-wider uppercase" href="#events">Ceremonies</a>
+<a class="px-4 py-1.5 rounded-full font-label-md text-xs font-medium text-on-surface-variant hover:text-primary hover:bg-surface transition-all tracking-wider uppercase" href="#venue">Venue</a>
+<a class="px-4 py-1.5 rounded-full font-label-md text-xs font-medium text-on-surface-variant hover:text-primary hover:bg-surface transition-all tracking-wider uppercase" href="#blessings">Blessings</a>
+<a class="px-4 py-1.5 rounded-full font-label-md text-xs font-medium text-on-surface-variant hover:text-primary hover:bg-surface transition-all tracking-wider uppercase" href="#family">Family</a>
+</nav>
+<!-- Action Wax Seal Button -->
+<div class="pointer-events-auto flex items-center gap-2">
+<a class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary hover:bg-deep-rose text-on-primary shadow-[0_4px_14px_rgba(119,90,25,0.25)] transition-all font-label-sm text-[11px] uppercase tracking-widest font-semibold" href="#rsvp">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">mail_lock</span>
+<span>RSVP With Love</span>
+</a>
+</div>
+</div>
+</header>
+<main class="w-full pt-20 relative">
+<!-- ========================================================================= -->
+<!-- SECTION 1: HERO / ROYAL LIVING INVITATION FOLIO -->
+<!-- ========================================================================= -->
+<section class="relative w-full py-12 lg:py-20 px-4 sm:px-8 flex flex-col items-center justify-center text-center">
+<!-- Glow aura -->
+<div class="absolute w-[600px] h-[600px] rounded-full bg-rose-gold/15 blur-3xl pointer-events-none -top-24"></div>
+<div class="absolute w-[500px] h-[500px] rounded-full bg-primary-container/15 blur-3xl pointer-events-none top-40 right-10"></div>
+<!-- Heirloom Stationery Folio Card -->
+<div class="relative w-full max-w-5xl bg-surface-container-low rounded-3xl p-6 sm:p-12 lg:p-16 shadow-[0_10px_35px_-5px_rgba(78,55,0,0.08),0_24px_60px_-10px_rgba(154,59,77,0.12)] border border-primary-container/30">
+<!-- Inner Gold Inset Emboss Lines -->
+<div class="absolute inset-3 sm:inset-5 rounded-2xl pointer-events-none embossed-border"></div>
+<div class="relative z-10 flex flex-col items-center">
+<!-- Auspicious Mangal Shlok & Floral Bells -->
+<div class="flex items-center justify-center gap-3 mb-4">
+<span class="w-10 sm:w-20 h-px bg-gradient-to-r from-transparent via-primary-container to-transparent inline-block"></span>
+<span class="material-symbols-outlined text-primary text-[18px]">spa</span>
+<span class="font-label-sm text-xs tracking-[0.3em] text-primary uppercase font-bold">|| श्री गणेशाय नमः ||</span>
+<span class="material-symbols-outlined text-primary text-[18px]">spa</span>
+<span class="w-10 sm:w-20 h-px bg-gradient-to-l from-transparent via-primary-container to-transparent inline-block"></span>
+</div>
+<p class="font-quote-italic text-lg sm:text-xl text-deep-rose italic max-w-2xl mb-8">
+            “Together with our families, we joyfully invite you to celebrate this beautiful beginning”
+          </p>
+<!-- 1. TOP CENTER: EMBOSSED GILDED ROYAL MS MONOGRAM CREST (IMAGE_2) -->
+<div class="relative mb-6 group cursor-pointer" onclick="triggerFlowerShower()">
+<div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full p-2 bg-gradient-to-tr from-[#D4AF37] via-[#FFF3D1] to-[#AA7C11] shadow-[0_10px_30px_rgba(119,90,25,0.25)] relative transform hover:scale-105 transition-transform duration-500">
+<div class="w-full h-full rounded-full overflow-hidden bg-surface shadow-inner p-1">
+<img alt="Royal M&amp;S Gilded Monogram Crest" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTp2-xpy0MXidXOflBCBRV6IzFi5VgOztMPUZXeSBihbN4bEYQj0d_Jxg4MZacR7YNMLRqmiyRGir8TMVm55PMMt7lzkmOgj1ow7MHlrUhCotVW220SHd4KEcqeLZESOY5dgguLa-s9NWswaRO0fdtorJLhfpFfrIcZbXnl4YHLsrJq9lIg87rBRCfjHdHAUzxr9t3hzO-lqaltE-CyS99ymwr_WAAaKwhZ-x9LQDYasfcNas4gv0ne5R302NJbzzMRw"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center shadow-md border-2 border-surface">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">auto_awesome</span>
+</div>
+</div>
+</div>
+<!-- 2. LUXURY COUPLE NAMES -->
+<h1 class="font-display-lg text-4xl sm:text-6xl md:text-7xl text-primary tracking-wide font-normal mb-2">
+            Manya <span class="font-quote-italic text-deep-rose text-3xl sm:text-5xl font-light italic">&amp;</span> Sarthak
+          </h1>
+<p class="font-label-md text-xs sm:text-sm uppercase tracking-[0.25em] text-secondary mb-8">
+            The Wedding of Two Hearts • Udaipur, Rajasthan
+          </p>
+<!-- 3. UNDERNEATH: BESPOKE ARTWORK OF MANYA & SARTHAK POINTING JOYFULLY TO THE CREST (IMAGE_11) -->
+<div class="relative w-full max-w-3xl rounded-2xl overflow-hidden shadow-[0_16px_40px_rgba(68,50,15,0.12)] border-2 border-primary-container/40 group bg-surface">
+<img alt="Manya and Sarthak in traditional wedding attire looking joyfully up and pointing towards their wedding crest" class="w-full h-auto object-cover transform duration-700 group-hover:scale-[1.02]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBziT2YbMsroF74vS2dHA67rs3V8XtRh_JGXa1ZbboBcm682fOkQ0KOWymUILZfzbCH6_SfrN4zH4U-dgK86PGEkYY4CqKLfxtFUWx8nkrmyBeK0JB-IHOXj17Nc6ypLS19WIAfHSoqXYR2iFvLm_X6stXAbxzKla1c01DDJlL4IXzD6ZvePSb6SY5Y67ggT8NHFfjZhBXytPqtyXi5d8W7w-sROquC0X_9OAlXyC2qpQe9-HctnG1P"/>
+<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-on-surface/85 via-on-surface/30 to-transparent p-6 sm:p-8 text-left text-white flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+<div>
+<span class="font-label-sm text-[11px] uppercase tracking-widest text-primary-fixed font-bold bg-primary/70 backdrop-blur-sm px-3 py-1 rounded-full inline-block mb-2">Auspicious Sacred Union</span>
+<p class="font-quote-italic text-xl sm:text-2xl italic text-white drop-shadow">
+                  “A love story nurtured by laughter, family love, and endless chai dates.”
+                </p>
+</div>
+<button class="px-4 py-2 rounded-full bg-surface/90 hover:bg-white text-primary text-xs font-label-md uppercase tracking-wider font-semibold shadow-md backdrop-blur-md flex items-center gap-1.5 flex-shrink-0 transition-all" onclick="triggerFlowerShower()">
+<span class="material-symbols-outlined text-[16px] text-deep-rose">favorite</span>
+<span>Shower Petals</span>
+</button>
+</div>
+</div>
+<!-- Quick Navigation CTA Group -->
+<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+<a class="px-8 py-3.5 rounded-xl bg-primary hover:bg-deep-rose text-on-primary font-label-lg text-xs tracking-[0.2em] uppercase font-semibold shadow-[0_6px_20px_rgba(119,90,25,0.25)] transition-all transform hover:-translate-y-0.5 flex items-center gap-2" href="#scratch-card">
+<span class="material-symbols-outlined text-[18px] text-primary-fixed">lock_open</span>
+<span>Reveal The Wedding Date</span>
+</a>
+<a class="px-8 py-3.5 rounded-xl bg-surface hover:bg-surface-container text-primary font-label-lg text-xs tracking-[0.2em] uppercase font-semibold border border-primary-container/40 transition-all shadow-sm flex items-center gap-2" href="#events">
+<span class="material-symbols-outlined text-[18px]">celebration</span>
+<span>View Celebrations</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 2: SIGNATURE GOLDEN HEART SCRATCH CARD -->
+<!-- ========================================================================= -->
+<section class="w-full py-16 px-4 sm:px-8 bg-surface relative" id="scratch-card">
+<div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+<!-- Header badge -->
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blush border border-deep-rose/20 text-deep-rose mb-3">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+<span class="font-label-sm text-xs tracking-widest uppercase font-semibold">Our Auspicious Muhurat</span>
+</div>
+<h2 class="font-display-md text-3xl sm:text-4xl md:text-5xl text-primary font-normal mb-3">
+          Scratch Our Little Secret
+        </h2>
+<p class="font-quote-italic text-lg text-secondary italic max-w-lg mb-8">
+          Rub with your finger or cursor over the golden heart to reveal the sacred wedding date!
+        </p>
+<!-- Golden Heart Mount Container -->
+<div class="relative flex flex-col items-center justify-center p-8 sm:p-12 rounded-3xl bg-surface-container-low border border-primary-container/40 shadow-[0_12px_40px_rgba(119,90,25,0.08)]">
+<!-- Heart Shape Interactive Wrapper -->
+<div class="relative heart-mask-box shadow-2xl flex items-center justify-center bg-gradient-to-br from-[#fcf7ec] via-[#FFF3D6] to-[#F5E6C4] border-4 border-gold-accent rounded-[40px]">
+<!-- UNDERNEATH REVEALED CONTENT -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 select-none bg-gradient-to-b from-[#FFFDF9] via-[#FAF3E7] to-[#F5ECE0]">
+<div class="w-10 h-10 rounded-full bg-deep-rose/10 flex items-center justify-center text-deep-rose mb-1">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<span class="font-label-sm text-[10px] sm:text-xs uppercase tracking-[0.25em] text-deep-rose font-bold">Save The Date</span>
+<h3 class="font-display-md text-2xl sm:text-3xl md:text-4xl text-primary font-bold tracking-wide my-1">
+                14 DECEMBER 2026
+              </h3>
+<p class="font-headline-sm text-xs sm:text-sm font-semibold text-on-surface mb-1">
+                Monday • Godhuli Bela &amp; Moonlit Pheras
+              </p>
+<p class="font-body-sm text-[11px] sm:text-xs text-secondary mb-3">
+                The Heritage Grand Palace • Udaipur, Rajasthan
+              </p>
+<button class="px-4 py-1.5 rounded-full bg-primary hover:bg-deep-rose text-white text-[11px] font-label-sm uppercase tracking-wider font-semibold shadow-sm transition-all flex items-center gap-1" onclick="downloadCalendarInvite()">
+<span class="material-symbols-outlined text-[14px]">event_available</span>
+<span>Add To Calendar</span>
+</button>
+</div>
+<!-- INTERACTIVE CANVAS OVERLAY FOR SCRATCHING -->
+<canvas class="absolute inset-0 w-full h-full cursor-crosshair touch-none transition-opacity duration-700 z-20" id="heartScratchCanvas"></canvas>
+</div>
+<!-- Bottom Action Buttons & Reaction Prompt -->
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 w-full max-w-md">
+<div class="flex items-center gap-2 text-secondary text-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">gesture</span>
+<span>Gently rub heart surface</span>
+</div>
+<button class="px-5 py-2.5 rounded-xl bg-surface hover:bg-secondary-container text-primary border border-primary-container/40 font-label-md text-xs uppercase tracking-wider font-semibold transition-all shadow-sm flex items-center gap-1.5" id="quickRevealBtn" type="button">
+<span class="material-symbols-outlined text-[16px] text-deep-rose">magic_button</span>
+<span>Tap to Reveal Date</span>
+</button>
+</div>
+<!-- Joyful Reaction Banner upon Reveal -->
+<div class="hidden mt-6 p-4 rounded-xl bg-blush border border-rose-gold text-deep-rose text-sm font-medium animate-bounce max-w-md" id="scratchCelebrationAlert">
+            🌸 Subhanallah &amp; Mubarak! Mark your calendars for December 14, 2026 in Udaipur! We cannot wait to dance together! 🌸
+          </div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 3: OUR STORY (HOW TWO PEOPLE BECAME ONE LITTLE FAMILY) -->
+<!-- ========================================================================= -->
+<section class="w-full py-16 px-4 sm:px-8 bg-surface-container-low" id="our-story">
+<div class="max-w-6xl mx-auto flex flex-col items-center">
+<div class="text-center max-w-2xl mb-12">
+<span class="font-label-sm text-xs uppercase tracking-[0.25em] text-primary font-bold">Chapter of Destiny</span>
+<h2 class="font-display-md text-3xl sm:text-4xl md:text-5xl text-on-surface mt-2 mb-3">
+            Two Paths. One Beautiful Story
+          </h2>
+<p class="font-quote-italic text-lg text-secondary italic">
+            “From our very first chai to quiet promises under the royal stars.”
+          </p>
+<div class="w-20 h-0.5 bg-primary-container/50 mx-auto mt-4"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+<!-- Corridor Walk Image Frame (IMAGE_5) -->
+<div class="lg:col-span-7 relative">
+<div class="relative rounded-3xl overflow-hidden shadow-[0_16px_40px_rgba(44,38,35,0.12)] border-2 border-primary-container/30 bg-surface">
+<img alt="Manya and Sarthak walking side by side in a royal Indian palace corridor with morning sunlight" class="w-full h-[420px] sm:h-[500px] object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VI4lzr-warAumhnHreiwY2HEvgfI3a0s7AiASCCqvxjfqIl6Qu5IWhtG6QPphr2Wuu-QKwZiYxvh2IRNZnM9GrkZseMtDRdphW5DyCpvuj8eYoDYHUFPAtFzlwZIEh_vQi_Y_BcXc2SOmtmzJ_in8ErmqxRBnXf2nh0aRwL48fRFib7LcT-CXtgsOwGPF_xxD2VsSFG-LJCE0Hs69Y2Nybey2v5yxDUtMMlqBirO3JmkhyMi3HASPYGl4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6 sm:p-8">
+<p class="font-quote-italic text-xl sm:text-2xl text-white italic drop-shadow">
+                  “Every step brought us closer to a home we found in each other.”
+                </p>
+</div>
+</div>
+<div class="absolute -bottom-4 -right-4 bg-primary text-on-primary px-5 py-2.5 rounded-2xl shadow-lg hidden sm:flex items-center gap-2 border-2 border-surface">
+<span class="material-symbols-outlined text-[18px] text-primary-fixed">auto_stories</span>
+<span class="font-label-sm text-xs tracking-wider uppercase font-semibold">Heirloom Memories</span>
+</div>
+</div>
+<!-- Milestones Bento -->
+<div class="lg:col-span-5 flex flex-col gap-5">
+<div class="bg-surface p-6 sm:p-8 rounded-2xl shadow-sm border border-primary-container/20">
+<h3 class="font-headline-md text-2xl text-primary mb-2">The Melodic Serendipity</h3>
+<p class="font-body-md text-sm sm:text-base text-on-surface-variant leading-relaxed mb-3">
+                From playful debates over books and coffee in cozy urban corners to wandering under the sun-drenched sandstone arches of Rajasthan, two kindred souls gently intertwined their lives.
+              </p>
+<p class="font-body-md text-sm text-secondary italic">
+                “She brought the spontaneous burst of watercolor and joy; he brought the quiet warmth, witty wisdom, and calming reassurance.”
+              </p>
+</div>
+<!-- Milestone Steps -->
+<div class="bg-surface p-6 rounded-2xl shadow-sm border border-primary-container/20 flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex-shrink-0 flex items-center justify-center text-on-primary-fixed font-headline-sm font-bold text-sm">
+                  1
+                </div>
+<div>
+<p class="font-headline-sm text-base text-on-surface font-semibold">The First Hello &amp; Endless Chai</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Winter 2021 • A rainy coffee date that stretched until the city lights dimmed.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-rose-gold/40 flex-shrink-0 flex items-center justify-center text-deep-rose font-headline-sm font-bold text-sm">
+                  2
+                </div>
+<div>
+<p class="font-headline-sm text-base text-on-surface font-semibold">The Jaipur Sunset Proposal</p>
+<p class="font-body-sm text-xs text-on-surface-variant">Autumn 2024 • A whispered heartfelt question under starlit palace ramparts.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex-shrink-0 flex items-center justify-center font-headline-sm font-bold text-sm shadow-sm">
+                  3
+                </div>
+<div>
+<p class="font-headline-sm text-base text-primary font-bold">The Sacred Pheras</p>
+<p class="font-body-sm text-xs text-on-surface-variant">14 December 2026 • The beginning of our forever with our families.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 4: CEREMONY & EVENTS (JOYFUL INDIAN WEDDING ITINERARY) -->
+<!-- ========================================================================= -->
+<section class="w-full py-16 px-4 sm:px-8 bg-surface" id="events">
+<div class="max-w-6xl mx-auto flex flex-col items-center">
+<div class="text-center max-w-2xl mb-12">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed/40 text-primary mb-2 font-label-sm text-xs uppercase tracking-widest font-semibold">
+<span class="material-symbols-outlined text-[15px]">festival</span>
+<span>Celebration Schedule</span>
+</div>
+<h2 class="font-display-md text-3xl sm:text-4xl md:text-5xl text-on-surface mb-2">The Wedding Festivities</h2>
+<p class="font-quote-italic text-lg text-secondary italic">Three days of joyous laughter, vibrant flowers, and timeless music</p>
+<div class="w-16 h-0.5 bg-primary-container/50 mx-auto mt-4"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+<!-- EVENT 1: HALDI -->
+<div class="bg-surface-container-low rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow border border-amber-200 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-28 h-28 bg-amber-100 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-xs uppercase tracking-widest text-amber-800 font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> Day 01 • Morning
+                </span>
+<span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 font-label-sm text-xs font-semibold">10:30 AM Onwards</span>
+</div>
+<h3 class="font-headline-lg text-2xl text-on-surface mb-1">Haldi &amp; Phoolon Ki Holi</h3>
+<p class="font-quote-italic text-amber-800 mb-3 text-sm italic">“Shades of Turmeric, Marigold Petals &amp; Dholak Beats”</p>
+<p class="font-body-md text-sm text-on-surface-variant mb-6">
+                A joyous sunlit courtyard ritual soaked in pure yellow rose petals, fragrant sandalwood paste, joyful folk dance, and refreshing thandai.
+              </p>
+<div class="flex flex-col gap-2 pt-4 border-t border-amber-200/60">
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[16px] text-amber-600">location_on</span>
+<span>The Lotus Courtyard &amp; Poolside Pavilions</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[16px] text-amber-600">styler</span>
+<span>Attire: <strong class="text-amber-900">Sun-kissed Yellows &amp; Floral Prints</strong></span>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<button class="w-full py-2.5 rounded-xl bg-surface hover:bg-amber-50 text-amber-900 font-label-sm text-xs tracking-widest uppercase font-semibold transition-all border border-amber-300 flex items-center justify-center gap-2" onclick="downloadEventInvite('Haldi &amp; Phoolon Ki Holi', '2026-12-13T10:30:00')">
+<span class="material-symbols-outlined text-[16px]">event</span>
+                Add to Calendar
+              </button>
+</div>
+</div>
+<!-- EVENT 2: SANGEET -->
+<div class="bg-surface-container-low rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow border border-teal-200 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-28 h-28 bg-teal-100/60 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-xs uppercase tracking-widest text-teal-800 font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-teal-600"></span> Day 01 • Evening
+                </span>
+<span class="px-3 py-1 rounded-full bg-teal-100 text-teal-900 font-label-sm text-xs font-semibold">07:00 PM Till Late</span>
+</div>
+<h3 class="font-headline-lg text-2xl text-on-surface mb-1">Mehendi &amp; Sangeet Revelry</h3>
+<p class="font-quote-italic text-teal-800 mb-3 text-sm italic">“Henna, Rhythms &amp; Royal Palace Darbar”</p>
+<p class="font-body-md text-sm text-on-surface-variant mb-6">
+                An energetic evening of Rajasthani folk fusion, dazzling family performances, fragrant henna artists, artisan cocktails, and endless dancing.
+              </p>
+<div class="flex flex-col gap-2 pt-4 border-t border-teal-200/60">
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[16px] text-teal-700">location_on</span>
+<span>The Grand Durbar Amphitheatre</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[16px] text-teal-700">styler</span>
+<span>Attire: <strong class="text-teal-900">Emerald Glamour &amp; Indo-Western Bling</strong></span>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<button class="w-full py-2.5 rounded-xl bg-surface hover:bg-teal-50 text-teal-900 font-label-sm text-xs tracking-widest uppercase font-semibold transition-all border border-teal-300 flex items-center justify-center gap-2" onclick="downloadEventInvite('Mehendi &amp; Sangeet', '2026-12-13T19:00:00')">
+<span class="material-symbols-outlined text-[16px]">event</span>
+                Add to Calendar
+              </button>
+</div>
+</div>
+<!-- EVENT 3: PHERAS (MAIN WEDDING) -->
+<div class="bg-surface-container-low rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow border border-rose-200 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-28 h-28 bg-rose-100/70 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-xs uppercase tracking-widest text-deep-rose font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-deep-rose"></span> Day 02 • Sacred Muhurat
+                </span>
+<span class="px-3 py-1 rounded-full bg-deep-rose text-white font-label-sm text-xs font-semibold">05:30 PM Baraat</span>
+</div>
+<h3 class="font-headline-lg text-2xl text-on-surface mb-1">The Royal Vows &amp; Pheras</h3>
+<p class="font-quote-italic text-deep-rose mb-3 text-sm italic">“Pheras under the Lakeside Mandap”</p>
+<p class="font-body-md text-sm text-on-surface-variant mb-6">
+                Grand royal Baraat arrival with shehnai, followed by sacred Vedic chants, Hastamelap, and the seven eternal rounds around the sacred Agni.
+              </p>
+<div class="flex flex-col gap-2 pt-4 border-t border-rose-200/60">
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[16px] text-deep-rose">location_on</span>
+<span>Lakeside Water Pavilion Mandap</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[16px] text-deep-rose">styler</span>
+<span>Attire: <strong class="text-deep-rose">Royal Rajputana • Silk Sherwanis &amp; Benarasi Sarees</strong></span>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<button class="w-full py-2.5 rounded-xl bg-surface hover:bg-rose-50 text-deep-rose font-label-sm text-xs tracking-widest uppercase font-semibold transition-all border border-rose-300 flex items-center justify-center gap-2" onclick="downloadEventInvite('The Royal Wedding &amp; Pheras', '2026-12-14T17:30:00')">
+<span class="material-symbols-outlined text-[16px]">event</span>
+                Add to Calendar
+              </button>
+</div>
+</div>
+<!-- EVENT 4: RECEPTION -->
+<div class="bg-surface-container-low rounded-2xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow border border-primary-container/30 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-28 h-28 bg-primary-fixed/30 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-xs uppercase tracking-widest text-primary font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Day 03 • Gala Finale
+                </span>
+<span class="px-3 py-1 rounded-full bg-primary-container/30 text-on-primary-container font-label-sm text-xs font-semibold">08:00 PM Onwards</span>
+</div>
+<h3 class="font-headline-lg text-2xl text-on-surface mb-1">The Grand Reception Banquet</h3>
+<p class="font-quote-italic text-primary mb-3 text-sm italic">“An Evening of Symphony &amp; Royal Feasts”</p>
+<p class="font-body-md text-sm text-on-surface-variant mb-6">
+                A starlit celebration featuring orchestral melodies, heirloom Rajasthani &amp; Continental gastronomy, heartfelt toasts, and celebratory cake cutting.
+              </p>
+<div class="flex flex-col gap-2 pt-4 border-t border-primary-container/20">
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[16px] text-primary">location_on</span>
+<span>The Crystal Ballroom &amp; Moonlit Terraces</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[16px] text-primary">styler</span>
+<span>Attire: <strong class="text-primary">Tuxedos, Embroidered Gowns &amp; Lehengas</strong></span>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<button class="w-full py-2.5 rounded-xl bg-surface hover:bg-primary-fixed/20 text-primary font-label-sm text-xs tracking-widest uppercase font-semibold transition-all border border-primary-container/40 flex items-center justify-center gap-2" onclick="downloadEventInvite('The Royal Reception Banquet', '2026-12-15T20:00:00')">
+<span class="material-symbols-outlined text-[16px]">event</span>
+                Add to Calendar
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 5: VENUE & TRAVEL SANCTUARY -->
+<!-- ========================================================================= -->
+<section class="w-full py-16 px-4 sm:px-8 bg-surface-container-low" id="venue">
+<div class="max-w-6xl mx-auto flex flex-col items-center">
+<div class="text-center max-w-xl mb-12">
+<span class="font-label-sm text-xs uppercase tracking-[0.25em] text-primary font-bold">Sanctuary of Hospitality</span>
+<h2 class="font-display-md text-3xl sm:text-4xl md:text-5xl text-on-surface mt-2 mb-2">The Heritage Palace &amp; Resort</h2>
+<p class="font-quote-italic text-lg text-secondary italic">Udaipur, The City of Lakes • Rajasthan</p>
+<div class="w-16 h-0.5 bg-primary-container/50 mx-auto mt-4"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
+<!-- Details & Amenities -->
+<div class="lg:col-span-2 bg-surface rounded-3xl p-6 sm:p-10 shadow-sm border border-primary-container/30 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-lg text-2xl sm:text-3xl text-primary mb-3">Regal Warmth by Lake Pichola</h3>
+<p class="font-body-md text-sm sm:text-base text-on-surface-variant leading-relaxed mb-4">
+                Framed by the ancient Aravalli peaks, the palace preserves centuries-old Mewar architecture with hand-carved stone arches, delicate jharokhas, and sun-dappled courtyard fountains.
+              </p>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
+                We have arranged royal suites for all our invited guests so that you can relax and celebrate with ease.
+              </p>
+</div>
+<!-- Direction Map Card Embedded -->
+<div class="mt-6 rounded-2xl overflow-hidden border border-primary-container/30 shadow-sm bg-surface-container relative p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">map</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-base text-on-surface font-bold">Lake Pichola Road, Udaipur</h4>
+<p class="font-body-sm text-xs text-secondary">40 mins from Maharana Pratap Airport (UDR)</p>
+</div>
+</div>
+<a class="px-5 py-2.5 rounded-xl bg-primary hover:bg-deep-rose text-white text-xs font-label-sm uppercase tracking-wider font-semibold shadow-md flex items-center gap-2 transition-colors flex-shrink-0" href="https://maps.google.com/?q=Lake+Pichola+Udaipur" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">directions</span>
+<span>Get Directions on Google Maps</span>
+</a>
+</div>
+<!-- Perks Strip -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 pt-6 border-t border-primary-container/20">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">hotel</span>
+<div>
+<p class="font-label-md text-xs font-bold text-on-surface">Luxury Suites</p>
+<p class="font-body-sm text-[11px] text-secondary">Reserved for Guests</p>
+</div>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">airport_shuttle</span>
+<div>
+<p class="font-label-md text-xs font-bold text-on-surface">Airport Fleet</p>
+<p class="font-body-sm text-[11px] text-secondary">Chauffeured Pickup</p>
+</div>
+</div>
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">soup_kitchen</span>
+<div>
+<p class="font-label-md text-xs font-bold text-on-surface">Royal Rasoi</p>
+<p class="font-body-sm text-[11px] text-secondary">All-Day Dining</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Hospitality Assistance Desk -->
+<div class="bg-surface rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-sm border border-primary-container/30">
+<div>
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined text-[24px]">support_agent</span>
+</div>
+<h4 class="font-headline-md text-xl text-on-surface mb-2">Hospitality &amp; Help Desk</h4>
+<p class="font-body-sm text-xs text-on-surface-variant leading-relaxed mb-6">
+                Our dedicated family hospitality team will receive you at Udaipur Airport and Railway Station with welcome garlands and refreshments.
+              </p>
+<div class="space-y-3">
+<div class="p-3.5 bg-surface-container-low rounded-xl border border-primary-container/20">
+<p class="font-label-sm text-[10px] uppercase tracking-wider text-secondary font-semibold">Guest Lead Coordinator</p>
+<p class="font-body-md text-sm text-on-surface font-semibold">+91 98765 43210 (Rajesh Ji)</p>
+</div>
+<div class="p-3.5 bg-surface-container-low rounded-xl border border-primary-container/20">
+<p class="font-label-sm text-[10px] uppercase tracking-wider text-secondary font-semibold">Luggage &amp; Check-In Desk</p>
+<p class="font-body-md text-sm text-on-surface font-semibold">Palace Main Porch Counter</p>
+</div>
+</div>
+</div>
+<a class="mt-6 w-full py-3 rounded-xl bg-primary hover:bg-deep-rose text-on-primary font-label-sm text-xs uppercase tracking-wider font-semibold transition-colors flex items-center justify-center gap-2 shadow-sm" href="https://wa.me/919876543210" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>WhatsApp Concierge</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 6: WARM FAMILY CONTACT & ANCESTRAL BLESSINGS -->
+<!-- ========================================================================= -->
+<section class="w-full py-16 px-4 sm:px-8 bg-surface" id="family">
+<div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+<span class="font-label-sm text-xs uppercase tracking-[0.25em] text-primary font-bold mb-2">With Deep Affection</span>
+<h2 class="font-display-md text-3xl sm:text-4xl text-on-surface mb-2">Our Families Are Here For You</h2>
+<p class="font-quote-italic text-lg text-secondary italic mb-10">Reach out directly for any travel or dietary questions</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full text-left">
+<!-- Bride's Family -->
+<div class="bg-surface-container-low p-6 sm:p-8 rounded-2xl border border-primary-container/30 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-full bg-rose-gold/30 flex items-center justify-center text-deep-rose">
+<span class="material-symbols-outlined text-[24px]">diversity_1</span>
+</div>
+<div>
+<span class="font-label-sm text-[10px] uppercase tracking-widest text-deep-rose font-bold">Bride's Family</span>
+<h4 class="font-headline-sm text-lg text-on-surface font-semibold">The Sharma Family</h4>
+</div>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant mb-6 leading-relaxed">
+                Warm hosts for room allocations, welcome refreshments, and morning rituals.
+              </p>
+</div>
+<div class="flex items-center gap-2">
+<a class="flex-1 py-2 rounded-xl bg-surface hover:bg-surface-container text-on-surface font-label-sm text-xs uppercase tracking-wider text-center border border-primary-container/30 transition-colors flex items-center justify-center gap-1" href="tel:+919811122233">
+<span class="material-symbols-outlined text-[16px] text-primary">call</span>
+<span>Call Us</span>
+</a>
+<a class="px-4 py-2 rounded-xl bg-deep-rose text-white hover:bg-rose-900 transition-colors flex items-center justify-center" href="https://wa.me/919811122233" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</a>
+</div>
+</div>
+<!-- Groom's Family -->
+<div class="bg-surface-container-low p-6 sm:p-8 rounded-2xl border border-primary-container/30 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">diversity_3</span>
+</div>
+<div>
+<span class="font-label-sm text-[10px] uppercase tracking-widest text-primary font-bold">Groom's Family</span>
+<h4 class="font-headline-sm text-lg text-on-surface font-semibold">The Singhania Family</h4>
+</div>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant mb-6 leading-relaxed">
+                Coordination for baraat assembly, safa tying, airport shuttles, and checkouts.
+              </p>
+</div>
+<div class="flex items-center gap-2">
+<a class="flex-1 py-2 rounded-xl bg-surface hover:bg-surface-container text-on-surface font-label-sm text-xs uppercase tracking-wider text-center border border-primary-container/30 transition-colors flex items-center justify-center gap-1" href="tel:+919822233344">
+<span class="material-symbols-outlined text-[16px] text-primary">call</span>
+<span>Call Us</span>
+</a>
+<a class="px-4 py-2 rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors flex items-center justify-center" href="https://wa.me/919822233344" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Ancestral Blessings Verse -->
+<div class="mt-12 p-8 rounded-3xl bg-blush/60 border border-rose-gold/40 max-w-2xl text-center">
+<span class="material-symbols-outlined text-deep-rose text-[28px] mb-2">flare</span>
+<p class="font-headline-md text-xl sm:text-2xl text-deep-rose italic mb-3">
+            “माङ्गल्यं तन्तुनानेन मम जीवनहेतुना ।<br/>कण्ठे बध्नामि शुभगे सञ्जीव शरदः शतम् ॥”
+          </p>
+<p class="font-quote-italic text-sm text-secondary italic mb-4">
+            “With this sacred bond, I unite my life with yours. May you flourish in joy for a hundred autumns.”
+          </p>
+<div class="w-12 h-px bg-primary-container/40 mx-auto my-3"></div>
+<p class="font-body-sm text-xs text-on-surface-variant">
+            With the timeless blessings of our beloved elders &amp; ancestors:
+          </p>
+<div class="mt-3 flex flex-wrap items-center justify-center gap-3 text-xs font-medium text-on-surface">
+<span class="px-3 py-1 rounded-full bg-surface">Late Smt. &amp; Shri R. C. Sharma</span>
+<span class="text-primary">•</span>
+<span class="px-3 py-1 rounded-full bg-surface">Late Smt. &amp; Shri V. N. Singhania</span>
+<span class="text-primary">•</span>
+<span class="px-3 py-1 rounded-full bg-surface">Smt. &amp; Shri D. K. Kapur</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 7: GUESTBOOK ('LEAVE A LITTLE LOVE FOR US') -->
+<!-- ========================================================================= -->
+<section class="w-full py-16 px-4 sm:px-8 bg-surface-container-low" id="blessings">
+<div class="max-w-4xl mx-auto flex flex-col items-center">
+<div class="text-center max-w-xl mb-10">
+<span class="font-label-sm text-xs uppercase tracking-[0.25em] text-primary font-bold">Shower Them With Love</span>
+<h2 class="font-display-md text-3xl sm:text-4xl text-on-surface mt-2 mb-2">Leave A Little Love For Us</h2>
+<p class="font-quote-italic text-lg text-secondary italic">Your personal prayer, marriage advice, or heartfelt note</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
+<!-- Input Form -->
+<div class="lg:col-span-5 bg-surface p-6 sm:p-8 rounded-2xl shadow-sm border border-primary-container/30">
+<form class="flex flex-col gap-4" id="blessingForm">
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-1" for="guestName">Your Name</label>
+<input class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-primary-container/30 focus:outline-none focus:ring-2 focus:ring-primary" id="guestName" placeholder="e.g. Radhika &amp; Vikram" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-1" for="guestRelation">Relation / City</label>
+<input class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-primary-container/30 focus:outline-none focus:ring-2 focus:ring-primary" id="guestRelation" placeholder="e.g. College Friend, New Delhi" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-1" for="blessingMsg">Your Warm Blessing</label>
+<textarea class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-primary-container/30 focus:outline-none focus:ring-2 focus:ring-primary" id="blessingMsg" placeholder="May your lives together be overflowing with immense joy, patience and giggles..." required="" rows="4"></textarea>
+</div>
+<button class="mt-2 py-3 rounded-xl bg-primary hover:bg-deep-rose text-on-primary font-label-lg text-xs tracking-wider uppercase font-semibold transition-all shadow-md flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span>Send Blessings</span>
+</button>
+</form>
+</div>
+<!-- Live Feed -->
+<div class="lg:col-span-7 flex flex-col gap-3">
+<p class="font-label-sm text-xs uppercase tracking-widest text-primary font-bold mb-1">Warm Wishes From Loved Ones</p>
+<div class="flex flex-col gap-3 max-h-[380px] overflow-y-auto pr-1" id="wishesContainer">
+<div class="bg-surface p-4 rounded-xl shadow-sm border border-primary-container/20">
+<div class="flex items-center justify-between mb-1">
+<span class="font-headline-sm text-sm font-bold text-on-surface">Aarav &amp; Ananya Verma</span>
+<span class="font-label-sm text-[11px] text-secondary">Mumbai</span>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant">
+                  “So beyond thrilled for you both! Manya, you will be the most radiant bride, and Sarthak, welcome to the family banter!”
+                </p>
+</div>
+<div class="bg-surface p-4 rounded-xl shadow-sm border border-primary-container/20">
+<div class="flex items-center justify-between mb-1">
+<span class="font-headline-sm text-sm font-bold text-on-surface">Ritu Chachi &amp; Family</span>
+<span class="font-label-sm text-[11px] text-secondary">London, UK</span>
+</div>
+<p class="font-body-sm text-xs text-on-surface-variant">
+                  “May Lord Krishna shower you both with boundless harmony and health. Counting down the hours till we celebrate at the Sangeet!”
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 8: HAPPILY EVER AFTER CLOSING CELEBRATION (IMAGE_10) -->
+<!-- ========================================================================= -->
+<section class="relative w-full py-16 px-4 sm:px-8 bg-surface overflow-hidden">
+<div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+<!-- Crest top pill -->
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-gold-accent p-1 bg-surface shadow-md mb-4">
+<img alt="MS Monogram Crest" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv1GRdxSyizSPFtmOl8bPyk57-iQ0j2T56XYvEGlSvvEA-W47_s0_mFHj0wFBkXhkf3r4SeZ2a8HqEuTMv_lPNgEwQTn0UEhD3wl39ZN-028ITXNTQk1R1NcF1C045j_eIyb8iJcSGUkVhPVNtDA38rxFvK4jTb_HonMoh1Z-iHmprtMsGu_X6waajqWDRSZesPGwx6T2Jy2IxekGNyrQDP434zPZ9F4ltOfz41QAXQx7guM7nkwnAujsPIE49YDxwZg"/>
+</div>
+<span class="font-label-sm text-xs uppercase tracking-[0.25em] text-deep-rose font-bold mb-1">Happily Ever After Celebration</span>
+<h2 class="font-display-md text-3xl sm:text-5xl text-primary font-normal mb-3">
+          We Can't Wait To Celebrate With You!
+        </h2>
+<p class="font-quote-italic text-lg text-secondary italic max-w-xl mb-8">
+          “Surrounded by flowers, music, and our dearest family under Udaipur’s golden sky.”
+        </p>
+<!-- Grand Flower Shower Artwork (IMAGE_10) -->
+<div class="relative w-full rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(119,90,25,0.18)] border-4 border-gold-accent/40 group">
+<img alt="Manya and Sarthak celebrating under a grand shower of rose petals and marigolds in traditional Indian wedding clothing" class="w-full h-auto object-cover transform duration-700 group-hover:scale-[1.01]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8xPnq6dBpNJnFIUH4C7N5VEOyU8iOX5yGHCwvIyioncc-AoZkhGHGvRsNIdvK9felCAb-CCLYlQAYxihe68qO_ut8oRf3KSJWe31ENkrNRZrcSVXB3jecN_T57HcH-CHiciHZHXmjrH5OtMAm9LIKgGlQw4xcUruVJ5KkpAyp3N1iMEAmpc3dfraKDabtF8OOjafxhD3zIGa_6f3sAxEa1fH5Mq9KK-41OVAdfS2ZpbDL0xFUZzPL"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-10 text-center sm:text-left text-white">
+<h3 class="font-display-md text-2xl sm:text-4xl text-white font-normal mb-2 drop-shadow">
+              A Lifetime of Love Begins
+            </h3>
+<p class="font-quote-italic text-sm sm:text-base text-white/90 max-w-lg mb-4">
+              Your blessings and presence are the greatest gift our two families could ask for.
+            </p>
+<div class="flex flex-wrap items-center gap-3">
+<a class="px-6 py-2.5 rounded-full bg-deep-rose hover:bg-rose-700 text-white font-label-md text-xs uppercase tracking-widest font-semibold shadow-md transition-all" href="#rsvp">
+                Kindly RSVP
+              </a>
+<button class="px-6 py-2.5 rounded-full bg-white/90 hover:bg-white text-primary font-label-md text-xs uppercase tracking-widest font-semibold shadow-md transition-all" onclick="triggerFlowerShower()">
+                🌸 Shower Petals
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- SECTION 9: RSVP PORTAL (WAX SEAL FOLIO) -->
+<!-- ========================================================================= -->
+<section class="w-full py-16 px-4 sm:px-8 bg-surface-container-low relative" id="rsvp">
+<div class="max-w-3xl mx-auto flex flex-col items-center">
+<div class="text-center max-w-xl mb-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed/40 text-primary mb-2 font-label-sm text-xs uppercase tracking-widest font-semibold">
+<span class="material-symbols-outlined text-[15px]">mail</span>
+<span>Kindly Respond</span>
+</div>
+<h2 class="font-display-md text-3xl sm:text-4xl text-on-surface mb-2">Will You Join The Celebration?</h2>
+<p class="font-quote-italic text-base text-secondary italic">Your presence will complete the joy of our families</p>
+</div>
+<!-- RSVP Form Folio -->
+<div class="w-full bg-surface rounded-3xl p-6 sm:p-10 shadow-[0_12px_40px_rgba(44,38,35,0.06)] border border-primary-container/30">
+<form class="flex flex-col gap-5" id="rsvpForm">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-1" for="rsvpName">Full Name</label>
+<input class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-primary-container/30 focus:outline-none focus:ring-2 focus:ring-primary" id="rsvpName" placeholder="Guest Name" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-1" for="rsvpPhone">WhatsApp / Mobile Number</label>
+<input class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-primary-container/30 focus:outline-none focus:ring-2 focus:ring-primary" id="rsvpPhone" placeholder="+91 00000 00000" required="" type="tel"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-2">Will you be able to attend?</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<label class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low cursor-pointer border border-primary-container/20 hover:border-primary transition-all">
+<input checked="" class="accent-primary" name="attending" type="radio" value="yes"/>
+<span class="font-body-md text-sm text-on-surface font-medium">Joyfully Attending</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low cursor-pointer border border-primary-container/20 hover:border-primary transition-all">
+<input class="accent-primary" name="attending" type="radio" value="no"/>
+<span class="font-body-md text-sm text-on-surface font-medium">Celebrating from Afar</span>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-1" for="guestCount">Number of Guests</label>
+<select class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-primary-container/30 focus:outline-none focus:ring-2 focus:ring-primary" id="guestCount">
+<option value="1">1 Person</option>
+<option selected="" value="2">2 Persons</option>
+<option value="3">3 Persons</option>
+<option value="4+">Family (4+ Persons)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-1" for="dietary">Dietary Preferences</label>
+<select class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-primary-container/30 focus:outline-none focus:ring-2 focus:ring-primary" id="dietary">
+<option value="veg">Vegetarian</option>
+<option value="jain">Pure Jain</option>
+<option value="nonveg">Non-Vegetarian</option>
+<option value="vegan">Vegan / Nut-Free</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-1" for="songRequest">Your Favorite Sangeet Track (To dance to!)</label>
+<input class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low text-sm text-on-surface border border-primary-container/30 focus:outline-none focus:ring-2 focus:ring-primary" id="songRequest" placeholder="e.g. Gallan Goodiyaan / Kudmayi" type="text"/>
+</div>
+<button class="w-full mt-2 py-3.5 rounded-xl bg-primary hover:bg-deep-rose text-on-primary font-label-lg text-xs tracking-widest uppercase font-semibold transition-all shadow-md flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[18px] text-primary-fixed">verified</span>
+<span>Submit RSVP Wax Seal</span>
+</button>
+</form>
+<p class="hidden text-center text-primary font-headline-sm mt-4 p-4 bg-primary-fixed/30 rounded-xl border border-primary-container/30 text-sm font-semibold" id="rsvpSuccessMsg">
+            🌸 Shukriya! Your RSVP has been lovingly registered. We are excited to welcome you to Udaipur!
+          </p>
+</div>
+</div>
+</section>
+</main>
+<!-- ========================================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================================= -->
+<footer class="w-full bg-surface-container-low border-t border-primary-container/30 py-12 px-4 sm:px-8">
+<div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+<div class="w-14 h-14 rounded-full p-1 bg-gradient-to-tr from-gold-accent to-primary-container shadow-sm mb-3">
+<img alt="M&amp;S Monogram" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_CsksFdNlsNbJKRV1HJD2Aru4yMTmEjMuPFf3Szyi7t89o1HTFSX9UTtYuxIWRKD_39DPZBorggPMT-mOFF9SlDJ1UdXepJEeP_OGU2jzE4b9mX4AgiJKIK5ftfQTt9xQsLIfCI9mztusysWi2EdqMzV_2eAhR4qp6zDHpw7-ZyJwhRjRZQn3fgb6KYZGlTR9kHNEpaafSYLCCbrClp6FzjfWLJsw6TbG1ydnP3Saq_aTCVURood_jpVo1M1Va1U_Qg"/>
+</div>
+<p class="font-headline-md text-2xl text-primary font-bold">Manya &amp; Sarthak</p>
+<p class="font-quote-italic text-sm text-secondary mt-1">14th December 2026 • Udaipur, Rajasthan</p>
+<div class="flex flex-wrap items-center justify-center gap-4 mt-6 text-xs uppercase tracking-widest text-on-surface-variant font-label-sm">
+<a class="hover:text-primary transition-colors" href="#our-story">Our Story</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#events">Ceremonies</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#venue">Stay &amp; Travel</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#blessings">Guestbook</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#rsvp">RSVP</a>
+</div>
+<p class="font-body-sm text-[11px] text-secondary/70 mt-6">
+        Handcrafted Living Wedding Card • Celebrating Ancestral Ties &amp; Sacred Union
+      </p>
+</div>
+</footer>
+<!-- ========================================================================= -->
+<!-- SCRIPT LOGIC: PETALS, SCRATCH CANVAS & INTERACTIONS -->
+<!-- ========================================================================= -->
+<script>
+    // 1. FLOATING PETALS GENERATOR
+    function createAmbientPetals() {
+      const container = document.getElementById('petalContainer');
+      if (!container) return;
+      const types = ['', 'jasmine', 'marigold'];
+      for (let i = 0; i < 18; i++) {
+        const petal = document.createElement('div');
+        const type = types[Math.floor(Math.random() * types.length)];
+        petal.className = `petal ${type}`;
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = (8 + Math.random() * 8) + 's';
+        petal.style.animationDelay = (Math.random() * 10) + 's';
+        const size = (12 + Math.random() * 12) + 'px';
+        petal.style.width = size;
+        petal.style.height = size;
+        container.appendChild(petal);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', createAmbientPetals);
+
+    // 2. FLOWER SHOWER BURST EFFECT
+    function triggerFlowerShower() {
+      const container = document.getElementById('petalContainer');
+      if (!container) return;
+      for (let i = 0; i < 35; i++) {
+        const petal = document.createElement('div');
+        petal.className = Math.random() > 0.4 ? 'petal' : (Math.random() > 0.5 ? 'petal jasmine' : 'petal marigold');
+        petal.style.left = (20 + Math.random() * 60) + 'vw';
+        petal.style.top = '-5vh';
+        petal.style.animationDuration = (3 + Math.random() * 3) + 's';
+        const size = (14 + Math.random() * 14) + 'px';
+        petal.style.width = size;
+        petal.style.height = size;
+        container.appendChild(petal);
+        setTimeout(() => petal.remove(), 6000);
+      }
+    }
+
+    // 3. HEART SHAPED GOLDEN SCRATCH CARD LOGIC
+    (function initHeartScratchCard() {
+      const canvas = document.getElementById('heartScratchCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let isDrawing = false;
+      let scratchedPixels = 0;
+      let revealed = false;
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        drawGoldFoil();
+      }
+
+      function drawGoldFoil() {
+        // Champagne Gold Foil Gradient
+        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, '#C5A059');
+        grad.addColorStop(0.25, '#F5E3A9');
+        grad.addColorStop(0.5, '#AA7C11');
+        grad.addColorStop(0.75, '#F9E9BA');
+        grad.addColorStop(1, '#B38B38');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Gold Shimmer Flecks
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        for (let i = 0; i < 70; i++) {
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          ctx.beginPath();
+          ctx.arc(x, y, Math.random() * 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Elegant Text Stamp on Foil
+        ctx.fillStyle = '#4E3700';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold 13px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('SCRATCH OUR SECRET', canvas.width / 2, canvas.height / 2 - 14);
+        ctx.font = 'italic 12px "Playfair Display", serif';
+        ctx.fillText('✨ to unveil auspicious date ✨', canvas.width / 2, canvas.height / 2 + 10);
+      }
+
+      function scratch(e) {
+        if (!isDrawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 26, 0, Math.PI * 2);
+        ctx.fill();
+
+        scratchedPixels++;
+        if (scratchedPixels > 30 && !revealed) {
+          triggerReveal();
+        }
+      }
+
+      function triggerReveal() {
+        revealed = true;
+        canvas.style.opacity = '0';
+        setTimeout(() => {
+          canvas.style.display = 'none';
+        }, 600);
+        document.getElementById('scratchCelebrationAlert')?.classList.remove('hidden');
+        triggerFlowerShower();
+      }
+
+      canvas.addEventListener('mousedown', () => isDrawing = true);
+      window.addEventListener('mouseup', () => isDrawing = false);
+      canvas.addEventListener('mousemove', scratch);
+
+      canvas.addEventListener('touchstart', (e) => {
+        isDrawing = true;
+        scratch(e);
+      }, { passive: true });
+      window.addEventListener('touchend', () => isDrawing = false);
+      canvas.addEventListener('touchmove', scratch, { passive: true });
+
+      const quickReveal = document.getElementById('quickRevealBtn');
+      if (quickReveal) {
+        quickReveal.addEventListener('click', triggerReveal);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+    })();
+
+    // 4. CALENDAR INVITE DOWNLOAD (.ICS GENERATION)
+    function downloadCalendarInvite() {
+      downloadEventInvite('Manya & Sarthak Wedding Celebration', '2026-12-14T17:30:00');
+    }
+
+    function downloadEventInvite(title, startTime) {
+      const start = startTime.replace(/[-:]/g, '');
+      const icsData = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Manya & Sarthak Wedding//EN',
+        'BEGIN:VEVENT',
+        `SUMMARY:${title}`,
+        `DESCRIPTION:Manya & Sarthak Wedding Celebrations in Udaipur, Rajasthan.`,
+        `LOCATION:The Heritage Grand Palace, Lake Pichola, Udaipur, Rajasthan`,
+        `DTSTART:${start}Z`,
+        `DTEND:${start}Z`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', `${title.replace(/[^a-z0-9]/gi, '_')}.ics`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      triggerFlowerShower();
+    }
+
+    // 5. GUESTBOOK BLESSING SUBMISSION
+    const blessingForm = document.getElementById('blessingForm');
+    if (blessingForm) {
+      blessingForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('guestName').value;
+        const relation = document.getElementById('guestRelation').value || 'Beloved Well-wisher';
+        const msg = document.getElementById('blessingMsg').value;
+
+        const card = document.createElement('div');
+        card.className = 'bg-surface p-4 rounded-xl shadow-sm border border-primary-container/20 transform transition-all duration-300 animate-fadeIn';
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-headline-sm text-sm font-bold text-on-surface">${name}</span>
+            <span class="font-label-sm text-[11px] text-secondary">${relation}</span>
+          </div>
+          <p class="font-body-sm text-xs text-on-surface-variant">“${msg}”</p>
+        `;
+
+        const container = document.getElementById('wishesContainer');
+        container.insertBefore(card, container.firstChild);
+        blessingForm.reset();
+        triggerFlowerShower();
+      });
+    }
+
+    // 6. RSVP SUBMISSION
+    const rsvpForm = document.getElementById('rsvpForm');
+    if (rsvpForm) {
+      rsvpForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        document.getElementById('rsvpSuccessMsg').classList.remove('hidden');
+        triggerFlowerShower();
+        rsvpForm.reset();
+      });
+    }
+
+    // 7. SHEHNAI MUSIC BUTTON TOGGLE
+    const shehnaiBtn = document.getElementById('shehnaiBtn');
+    let isPlaying = false;
+    if (shehnaiBtn) {
+      shehnaiBtn.addEventListener('click', function () {
+        isPlaying = !isPlaying;
+        const icon = document.getElementById('musicIcon');
+        if (icon) {
+          icon.textContent = isPlaying ? 'pause' : 'play_arrow';
+        }
+        triggerFlowerShower();
+      });
+    }
+  </script>
+</body></html>
