@@ -60,12 +60,12 @@ export const HeroSection: React.FC = () => {
 
           {/* 4. LUXURY COUPLE NAMES */}
           <h1 className="couple-names-headline">
-            Sarthak <span className="ampersand-accent">&amp;</span> Manya
+            Sarthak <span className="weds-accent">Weds</span> Manya
           </h1>
 
           {/* 5. WEDDING SUBTITLE */}
           <p className="wedding-subtitle">
-            The Wedding of Two Hearts • Oodles Hotel Chhattarpur
+            The Wedding of Two Hearts
           </p>
 
           {/* 6. COUPLE ARTWORK WITH MOBILE-SAFE REFLOW */}

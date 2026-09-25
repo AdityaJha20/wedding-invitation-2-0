@@ -588,7 +588,6 @@ export const ScratchDateSection: React.FC = () => {
               </div>
               <span className="revealed-save-date">Save The Date</span>
               <h3 className="revealed-wedding-date">24 NOVEMBER 2026</h3>
-              <p className="revealed-couple-names">Sarthak &amp; Manya</p>
             </div>
 
             {/* INTERACTIVE CANVAS OVERLAY FOR SCRATCHING */}
@@ -622,7 +621,7 @@ export const ScratchDateSection: React.FC = () => {
           {/* Joyful Celebration Banner upon Reveal */}
           {showCelebration && (
             <div className="scratch-celebration-banner" role="status" aria-live="polite">
-              🌸 Mubarak &amp; Badhaai Ho! Mark your calendars for 24 November 2026! We cannot wait to celebrate together! 🌸
+              🌸 Mark your calendars for 24 November 2026! We cannot wait to celebrate together! 🌸
             </div>
           )}
         </div>

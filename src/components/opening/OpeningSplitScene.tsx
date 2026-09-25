@@ -175,12 +175,15 @@ export const OpeningSplitScene: React.FC<OpeningSplitSceneProps> = ({ onOpenComp
           onClick={handleSealClick}
           disabled={isOpen}
         >
-          <img
-            src="/images/Gemini_Generated_Image_wtczcawtczcawtcz.png"
-            alt="SM Wax Seal Stamp"
-            className="wax-seal-image"
-            draggable={false}
-          />
+          <div className="wax-seal-frame">
+            <img
+              src="/images/Gemini_Generated_Image_wtczcawtczcawtcz.png"
+              alt="SM Wax Seal Stamp"
+              className="wax-seal-image"
+              draggable={false}
+            />
+            <span className="wax-seal-prompt">Tap to open</span>
+          </div>
         </button>
       </div>
     </div>

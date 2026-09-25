@@ -472,7 +472,7 @@
 /* 4. Couple Names Headline */
 .couple-names-headline {
   font-family: var(--wedding-font-serif);
-  font-size: clamp(28px, 7.8vw, 68px);
+  font-size: clamp(24px, 6.8vw, 68px);
   font-weight: 400;
   color: var(--wedding-primary);
   letter-spacing: 0.02em;
@@ -481,13 +481,15 @@
   text-wrap: balance;
 }
 
+.weds-accent,
 .ampersand-accent {
   font-family: var(--wedding-font-serif);
   font-style: italic;
   font-weight: 300;
-  font-size: 0.85em;
+  font-size: 0.82em;
   color: var(--wedding-deep-rose);
-  padding: 0 4px;
+  padding: 0 0.22em;
+  display: inline-block;
 }
 
 /* 5. Wedding Subtitle */
