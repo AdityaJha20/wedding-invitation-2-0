@@ -1,0 +1,364 @@
+/* ==========================================================================
+   Wedding Details / Celebrations Block — Heirloom Stationery Insert
+   A small, airy printed programme insert between Scratch Date and Venue
+   Mobile-First Architecture: 320px -> 375px -> 390px -> 640px -> 1024px+
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Section Wrapper (Compact Vertical Footprint)
+   -------------------------------------------------------------------------- */
+.wedding-details-section {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 16px 28px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
+  background: transparent;
+}
+
+@media (min-width: 640px) {
+  .wedding-details-section {
+    padding: 20px 24px 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wedding-details-section {
+    padding: 24px 32px 44px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Outer Stationery Card (Small Insert Folio)
+   -------------------------------------------------------------------------- */
+.wedding-details-card {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 160, 89, 0.38);
+  border-radius: 18px;
+  padding: 22px 16px 18px;
+  box-shadow:
+    0 4px 20px -2px rgba(44, 38, 35, 0.05),
+    0 1px 4px rgba(197, 160, 89, 0.08);
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .wedding-details-card {
+    padding: 26px 24px 22px;
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 640px) {
+  .wedding-details-card {
+    padding: 30px 32px 24px;
+  }
+}
+
+/* Subtle Inset Framing Line */
+.wedding-details-card::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(197, 160, 89, 0.18);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+@media (min-width: 480px) {
+  .wedding-details-card::before {
+    inset: 6px;
+    border-radius: 15px;
+  }
+}
+
+/* Ornate Corner Accents */
+.details-corner {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.corner-tl {
+  top: 9px;
+  left: 9px;
+  border-top: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-left: 1.5px solid rgba(197, 160, 89, 0.65);
+}
+
+.corner-tr {
+  top: 9px;
+  right: 9px;
+  border-top: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-right: 1.5px solid rgba(197, 160, 89, 0.65);
+}
+
+.corner-bl {
+  bottom: 9px;
+  left: 9px;
+  border-bottom: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-left: 1.5px solid rgba(197, 160, 89, 0.65);
+}
+
+.corner-br {
+  bottom: 9px;
+  right: 9px;
+  border-bottom: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-right: 1.5px solid rgba(197, 160, 89, 0.65);
+}
+
+/* --------------------------------------------------------------------------
+   3. Card Header (Small, Refined, Unobtrusive)
+   -------------------------------------------------------------------------- */
+.details-header {
+  text-align: center;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details-ornament-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  opacity: 0.85;
+}
+
+.details-ornament-line {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.6), transparent);
+}
+
+.details-ornament-symbol {
+  font-size: 8px;
+  color: var(--wedding-primary, #775a19);
+  line-height: 1;
+}
+
+.details-main-title {
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-size: clamp(19px, 3.8vw, 24px);
+  font-weight: 500;
+  color: var(--wedding-on-surface, #231e1a);
+  letter-spacing: 0.04em;
+  margin: 0 0 3px;
+  line-height: 1.2;
+}
+
+.details-subtitle {
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(12px, 2.2vw, 13.5px);
+  color: var(--wedding-secondary, #655d59);
+  margin: 0;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   4. Two-Day Chapters & 2x2 Events Grid
+   -------------------------------------------------------------------------- */
+.details-days-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.details-day-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Date Chapter Header */
+.details-day-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.details-day-rule {
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.4));
+}
+
+.details-day-rule.reverse {
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.4), transparent);
+}
+
+.details-day-date {
+  font-family: 'Cinzel', var(--wedding-font-sans), serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wedding-primary, #775a19);
+  white-space: nowrap;
+}
+
+@media (min-width: 480px) {
+  .details-day-date {
+    font-size: 11.5px;
+  }
+}
+
+/* 2-Column Balanced Events Grid */
+.details-events-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 14px;
+  row-gap: 8px;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .details-events-grid {
+    column-gap: 22px;
+  }
+}
+
+/* Subtle Vertical Divider Between Columns */
+.details-col-divider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(197, 160, 89, 0.28) 20%,
+    rgba(197, 160, 89, 0.28) 80%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Individual Moment Cell (Airy, Typography-Driven) */
+.details-event-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+
+.details-time-pill {
+  font-family: 'Cinzel', var(--wedding-font-sans), serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--wedding-secondary, #655d59);
+  background: rgba(245, 239, 230, 0.65);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.details-event-name {
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-size: clamp(16px, 3.4vw, 19.5px);
+  font-weight: 600;
+  color: var(--wedding-on-surface, #231e1a);
+  margin: 0 0 3px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.details-event-sub {
+  font-family: var(--wedding-font-sans, sans-serif);
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--wedding-secondary, #655d59);
+  margin: 0;
+}
+
+@media (min-width: 480px) {
+  .details-event-sub {
+    font-size: 11.5px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Delicate Chapter Divider (Between Day 1 and Day 2)
+   -------------------------------------------------------------------------- */
+.details-chapter-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 75%;
+  margin: 12px auto 14px;
+}
+
+.details-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.35), transparent);
+}
+
+.details-divider-ornament {
+  font-size: 9px;
+  color: var(--wedding-primary-container, #c5a059);
+  opacity: 0.85;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   6. Footer Micro Sign-off
+   -------------------------------------------------------------------------- */
+.details-footer-accent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(197, 160, 89, 0.16);
+}
+
+.details-footer-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: var(--wedding-primary-container, #c5a059);
+  opacity: 0.65;
+}
+
+.details-footer-text {
+  font-family: 'Cinzel', var(--wedding-font-sans), serif;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wedding-secondary, #655d59);
+  opacity: 0.75;
+}

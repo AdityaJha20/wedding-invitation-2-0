@@ -1,7 +1,9 @@
 import React from 'react';
 import { HeroSection } from './HeroSection';
 import { ScratchDateSection } from './ScratchDateSection';
+import { WeddingDetailsBlock } from './WeddingDetailsBlock';
 import { VenueCelebrationSection } from './VenueCelebrationSection';
+import { WeddingWishForm } from './WeddingWishForm';
 import '../../styles/wedding.css';
 
 interface WeddingExperienceProps {
@@ -21,8 +23,14 @@ export const WeddingExperience: React.FC<WeddingExperienceProps> = ({ isVisible 
         {/* 2. SIGNATURE GOLDEN HEART SCRATCH CARD SECTION */}
         <ScratchDateSection />
 
-        {/* 3. VENUE + WEDDING DATES SECTION */}
+        {/* 3. SMALL WEDDING DETAILS / CELEBRATIONS BLOCK */}
+        <WeddingDetailsBlock />
+
+        {/* 4. VENUE + WEDDING DATES SECTION */}
         <VenueCelebrationSection />
+
+        {/* 5. SMALL WEDDING WISH FORM */}
+        <WeddingWishForm />
       </main>
     </div>
   );

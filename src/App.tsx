@@ -4,6 +4,7 @@ import { OpeningHandoffOverlay } from './components/wedding/OpeningHandoffOverla
 import { GlobalPetalLayer } from './components/wedding/GlobalPetalLayer';
 import { MusicControl } from './components/wedding/MusicControl';
 import { WeddingExperience } from './components/wedding/WeddingExperience';
+import { weddingAudio } from './utils/audioManager';
 
 export const App: React.FC = () => {
   const [isOpeningFinished, setIsOpeningFinished] = useState(false);
@@ -13,6 +14,7 @@ export const App: React.FC = () => {
   // 1. Approved Opening Animation completes (LOCKED - untouched)
   const handleOpenComplete = useCallback(() => {
     setIsOpeningFinished(true);
+    weddingAudio.startMusic();
   }, []);
 
   // 2. Handoff veil reaches peak - reveal Real Wedding UI underneath

@@ -65,7 +65,7 @@ export const HeroSection: React.FC = () => {
 
           {/* 5. WEDDING SUBTITLE */}
           <p className="wedding-subtitle">
-            The Wedding of Two Hearts • Udaipur, Rajasthan
+            The Wedding of Two Hearts • Oodles Hotel Chhattarpur
           </p>
 
           {/* 6. COUPLE ARTWORK WITH MOBILE-SAFE REFLOW */}

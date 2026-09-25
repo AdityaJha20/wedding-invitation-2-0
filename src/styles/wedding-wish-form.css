@@ -1,0 +1,448 @@
+/* ==========================================================================
+   Wedding Wish Form — Heirloom Keepsake Guestbook Note
+   A small, intimate blessing card at the conclusion of the invitation
+   Mobile-First Architecture: 320px -> 375px -> 390px -> 640px -> 1024px+
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Section Wrapper
+   -------------------------------------------------------------------------- */
+.wedding-wish-section {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 16px 56px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 5;
+  background: transparent;
+}
+
+@media (min-width: 640px) {
+  .wedding-wish-section {
+    padding: 32px 24px 72px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wedding-wish-section {
+    padding: 40px 32px 88px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Outer Stationery Card (Keepsake Guestbook Folio)
+   -------------------------------------------------------------------------- */
+.wedding-wish-card {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(197, 160, 89, 0.38);
+  border-radius: 20px;
+  padding: 26px 18px 22px;
+  box-shadow:
+    0 8px 30px -4px rgba(44, 38, 35, 0.06),
+    0 1px 4px rgba(197, 160, 89, 0.08);
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .wedding-wish-card {
+    padding: 30px 26px 26px;
+    border-radius: 22px;
+  }
+}
+
+@media (min-width: 640px) {
+  .wedding-wish-card {
+    padding: 36px 36px 28px;
+  }
+}
+
+/* Delicate Inset Framing Line (Letterpress Matting) */
+.wedding-wish-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(197, 160, 89, 0.18);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+@media (min-width: 480px) {
+  .wedding-wish-card::before {
+    inset: 7px;
+    border-radius: 17px;
+  }
+}
+
+/* Ornate Corner Accents */
+.wish-corner {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.corner-tl {
+  top: 10px;
+  left: 10px;
+  border-top: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-left: 1.5px solid rgba(197, 160, 89, 0.65);
+}
+
+.corner-tr {
+  top: 10px;
+  right: 10px;
+  border-top: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-right: 1.5px solid rgba(197, 160, 89, 0.65);
+}
+
+.corner-bl {
+  bottom: 10px;
+  left: 10px;
+  border-bottom: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-left: 1.5px solid rgba(197, 160, 89, 0.65);
+}
+
+.corner-br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-right: 1.5px solid rgba(197, 160, 89, 0.65);
+}
+
+/* --------------------------------------------------------------------------
+   3. Card Header
+   -------------------------------------------------------------------------- */
+.wish-header {
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wish-ornament-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  opacity: 0.85;
+}
+
+.wish-ornament-line {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.6), transparent);
+}
+
+.wish-ornament-symbol {
+  font-size: 8px;
+  color: var(--wedding-primary, #775a19);
+  line-height: 1;
+}
+
+.wish-main-title {
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-size: clamp(20px, 4.2vw, 25px);
+  font-weight: 500;
+  color: var(--wedding-on-surface, #231e1a);
+  letter-spacing: 0.04em;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.wish-subtitle {
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: clamp(12px, 2.3vw, 14px);
+  color: var(--wedding-secondary, #655d59);
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  max-width: 380px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Form Elements & Inputs
+   -------------------------------------------------------------------------- */
+.wish-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.wish-field-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.wish-label {
+  font-family: 'Cinzel', var(--wedding-font-sans), serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--wedding-primary, #775a19);
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.wish-input,
+.wish-textarea {
+  width: 100%;
+  background: #FAF8F5;
+  border: 1px solid rgba(197, 160, 89, 0.42);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: var(--wedding-font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--wedding-on-surface, #231e1a);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+@media (min-width: 480px) {
+  .wish-input,
+  .wish-textarea {
+    padding: 11px 16px;
+    font-size: 14px;
+  }
+}
+
+.wish-input::placeholder,
+.wish-textarea::placeholder {
+  color: rgba(101, 93, 89, 0.45);
+  font-style: italic;
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-size: 13px;
+}
+
+.wish-input:focus,
+.wish-textarea:focus {
+  background: #FFFFFF;
+  border-color: rgba(197, 160, 89, 0.85);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.16);
+}
+
+.wish-textarea {
+  resize: vertical;
+  min-height: 96px;
+  max-height: 190px;
+}
+
+/* Subtle Validation Error */
+.wish-error-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--wedding-font-sans, sans-serif);
+  font-size: 11px;
+  color: #9A3B4D;
+  background: rgba(154, 59, 77, 0.08);
+  border: 1px solid rgba(154, 59, 77, 0.2);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.error-icon {
+  font-size: 14px !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Submit Action Button
+   -------------------------------------------------------------------------- */
+.wish-action-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.wish-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #d4af37 0%, #c5a059 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-family: 'Cinzel', var(--wedding-font-sans), serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (min-width: 480px) {
+  .wish-submit-btn {
+    padding: 13px 32px;
+    font-size: 11px;
+  }
+}
+
+.wish-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.45);
+  background: linear-gradient(135deg, #dfbe4a 0%, #b89140 100%);
+}
+
+.wish-submit-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(197, 160, 89, 0.3);
+}
+
+.wish-submit-btn:focus-visible {
+  outline: 2px solid var(--wedding-primary);
+  outline-offset: 2px;
+}
+
+.wish-btn-heart {
+  font-size: 13px !important;
+  color: #FFFFFF;
+}
+
+.wish-submit-btn.submitting {
+  opacity: 0.75;
+  cursor: wait;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   6. Warm Success State
+   -------------------------------------------------------------------------- */
+.wish-success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 12px;
+  animation: fadeInSuccess 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInSuccess {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wish-success-sparkle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FAF5EE 0%, #F5ECE0 100%);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  box-shadow: inset 0 1px 3px rgba(197, 160, 89, 0.12), 0 4px 12px rgba(197, 160, 89, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.success-heart-icon {
+  font-size: 22px !important;
+  color: #9A3B4D;
+}
+
+.wish-success-heading {
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-size: clamp(18px, 3.8vw, 22px);
+  font-weight: 500;
+  color: var(--wedding-on-surface, #231e1a);
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.wish-success-message {
+  font-family: var(--wedding-font-sans, sans-serif);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--wedding-secondary, #655d59);
+  margin: 0 0 6px;
+  max-width: 360px;
+}
+
+.wish-success-signoff {
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--wedding-primary, #775a19);
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
+.wish-reset-btn {
+  background: transparent;
+  border: none;
+  font-family: 'Cinzel', var(--wedding-font-sans), serif;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--wedding-primary, #775a19);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 4px 8px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.wish-reset-btn:hover {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   7. Card Footer Micro Sign-off
+   -------------------------------------------------------------------------- */
+.wish-footer-accent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(197, 160, 89, 0.16);
+}
+
+.wish-footer-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: var(--wedding-primary-container, #c5a059);
+  opacity: 0.65;
+}
+
+.wish-footer-text {
+  font-family: 'Cinzel', var(--wedding-font-sans), serif;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wedding-secondary, #655d59);
+  opacity: 0.75;
+}

@@ -35,6 +35,7 @@ test_*.jpg
 test_*.webp
 *.tmp
 *.temp
+scripts/
 
 # Temporary screenshots and browser automation artifacts
 stitch_venue_screen.png

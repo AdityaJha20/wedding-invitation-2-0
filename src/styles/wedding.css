@@ -43,8 +43,8 @@
   visibility: hidden;
   pointer-events: none;
   background-color: var(--wedding-surface);
-  background-image: 
-    radial-gradient(#d8ccb8 0.75px, transparent 0.75px), 
+  background-image:
+    radial-gradient(#d8ccb8 0.75px, transparent 0.75px),
     radial-gradient(#eedec9 0.75px, #FAF7F2 0.75px);
   background-size: 30px 30px;
   background-position: 0 0, 15px 15px;
@@ -128,8 +128,17 @@
 }
 
 @keyframes pulseMusic {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.15); opacity: 1; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
 }
 
 .music-song-name {
@@ -194,9 +203,11 @@
     padding: 3px 8px;
     gap: 4px;
   }
+
   .music-state-icon {
     font-size: 14px !important;
   }
+
   .music-toggle-label {
     font-size: 10px;
   }
@@ -278,7 +289,7 @@
   border-radius: 24px;
   padding: 28px 12px 24px;
   border: 1px solid rgba(197, 160, 89, 0.35);
-  box-shadow: 
+  box-shadow:
     0 10px 35px -5px rgba(78, 55, 0, 0.08),
     0 24px 60px -10px rgba(154, 59, 77, 0.12);
   box-sizing: border-box;
@@ -310,9 +321,9 @@
   inset: 8px;
   border-radius: 18px;
   pointer-events: none;
-  box-shadow: 
-    0 0 0 1px rgba(197, 160, 89, 0.4), 
-    inset 0 0 0 2px rgba(255, 255, 255, 0.9), 
+  box-shadow:
+    0 0 0 1px rgba(197, 160, 89, 0.4),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.9),
     inset 0 0 0 4px rgba(197, 160, 89, 0.25);
 }
 
@@ -836,24 +847,32 @@
 
 /* Golden Heart Interactive Frame
    - Uses scalable SVG objectBoundingBox clip-path (#wedding-heart-clip)
-   - Seamlessly fits from 250px up to 360px without touching container edges
+   - Seamlessly fits from 240px up to 360px without touching container edges
    - Zero horizontal overflow guarantee
+   - Responsive container query enabled for internal typography
    -------------------------------------------------------------------------- */
 .heart-interactive-frame {
   position: relative;
-  width: clamp(250px, 78vw, 360px);
-  height: calc(clamp(250px, 78vw, 360px) * 0.906);
+  container-type: inline-size;
+  width: clamp(240px, 76vw, 360px);
+  max-width: 100%;
+  aspect-ratio: 1 / 0.906;
+  height: auto;
   clip-path: url(#wedding-heart-clip);
   -webkit-clip-path: url(#wedding-heart-clip);
-  background: linear-gradient(135deg, #fcf7ec 0%, #FFF3D6 50%, #F5E6C4 100%);
-  box-shadow: 0 16px 38px rgba(119, 90, 25, 0.16);
+  background: linear-gradient(135deg, #DEBE8E 0%, #F5E5C9 50%, #CFA868 100%);
+  box-shadow: 0 16px 40px rgba(119, 90, 25, 0.20);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
 }
 
-/* Underneath Revealed Content */
+/* Underneath Revealed Content - Noticeably deeper/warmed luxury stationery interior */
 .heart-revealed-content {
   position: absolute;
   inset: 0;
@@ -862,67 +881,68 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: clamp(14px, 3.8vw, 24px);
+  /* Optical centering: heart tapers sharply at bottom, so padding-bottom is larger to keep content in widest sweet spot */
+  padding: 8cqw 6cqw 14cqw;
   user-select: none;
-  background: linear-gradient(to bottom, #FFFDF9 0%, #FAF3E7 50%, #F5ECE0 100%);
+  -webkit-user-select: none;
+  background: radial-gradient(circle at 50% 42%, #F5E5C9 0%, #EAD4B0 52%, #DCBE8E 100%);
+  box-shadow: inset 0 0 35px rgba(160, 120, 45, 0.16), inset 0 2px 6px rgba(119, 90, 25, 0.10);
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 .calendar-icon-disc {
-  width: 38px;
-  height: 38px;
+  width: clamp(26px, 10cqw, 42px);
+  height: clamp(26px, 10cqw, 42px);
   border-radius: 50%;
-  background: rgba(154, 59, 77, 0.1);
+  background: rgba(154, 59, 77, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--wedding-deep-rose);
-  margin-bottom: 4px;
-}
-
-@media (min-width: 640px) {
-  .calendar-icon-disc {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 6px;
-  }
+  margin-bottom: clamp(2px, 0.8cqw, 6px);
+  flex-shrink: 0;
 }
 
 .calendar-glyph {
-  font-size: 19px !important;
-}
-
-@media (min-width: 640px) {
-  .calendar-glyph {
-    font-size: 22px !important;
-  }
+  font-size: clamp(14px, 5.2cqw, 20px) !important;
 }
 
 .revealed-save-date {
   font-family: var(--wedding-font-sans);
-  font-size: clamp(9.5px, 2.4vw, 11px);
+  font-size: clamp(8.5px, 3.1cqw, 11px);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: clamp(0.1em, 0.4cqw, 0.18em);
   color: var(--wedding-deep-rose);
-  margin-bottom: 3px;
+  margin-bottom: clamp(1px, 0.5cqw, 3px);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .revealed-wedding-date {
   font-family: var(--wedding-font-serif);
-  font-size: clamp(21px, 5.2vw, 32px);
+  font-size: clamp(13px, 5.4cqw, 24px);
   font-weight: 700;
   color: var(--wedding-primary);
-  letter-spacing: 0.04em;
-  margin: 2px 0 4px;
+  letter-spacing: clamp(0.02em, 0.35cqw, 0.05em);
+  margin: clamp(1px, 0.5cqw, 4px) 0;
   line-height: 1.15;
+  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 90cqw;
 }
 
 .revealed-couple-names {
   font-family: var(--wedding-font-serif);
-  font-size: clamp(13px, 3.4vw, 15px);
+  font-size: clamp(11px, 4.2cqw, 16px);
   font-weight: 600;
   color: var(--wedding-on-surface);
+  white-space: nowrap;
+  margin-top: clamp(1px, 0.5cqw, 4px);
+  flex-shrink: 0;
+  max-width: 85cqw;
 }
 
 /* Scratch Canvas */
@@ -940,6 +960,18 @@
 .heart-scratch-canvas.revealed {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Celebration Fireworks Canvas Overlay */
+.scratch-fireworks-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 35;
+  border-radius: inherit;
+  overflow: hidden;
 }
 
 /* Action Bar below Heart */
@@ -1052,6 +1084,7 @@
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1343,184 +1376,15 @@
   }
 }
 
-/* 4. Wedding Celebration Schedule (Itinerary Card) */
-.venue-itinerary-container {
+/* 4. Structural Insertion Point: Future Scroll-Driven Event Timeline */
+.venue-timeline-insertion-point {
   width: 100%;
-  max-width: 760px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.venue-itinerary-card {
-  width: 100%;
-  background-color: #ffffff;
-  border: 1px solid rgba(197, 160, 89, 0.38);
-  border-radius: 20px;
-  padding: 24px 16px;
-  box-shadow: 0 10px 32px rgba(44, 38, 35, 0.06);
-  position: relative;
-  text-align: center;
-  box-sizing: border-box;
-  margin-bottom: 24px;
-}
-
-@media (min-width: 640px) {
-  .venue-itinerary-card {
-    border-radius: 24px;
-    padding: 36px 36px;
-    margin-bottom: 32px;
-  }
-}
-
-.itinerary-sparkle-monogram {
-  width: 38px;
-  height: 38px;
-  margin: 0 auto 10px;
-  border-radius: 50%;
-  background-color: var(--wedding-secondary-container);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-
-.itinerary-sparkle-icon {
-  font-size: 20px !important;
-  color: var(--wedding-primary);
-}
-
-.itinerary-card-title {
-  font-family: var(--wedding-font-sans);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
-  color: var(--wedding-primary);
-  font-weight: 700;
-  margin: 0 0 20px;
-}
-
-/* Two-Day Grid Layout */
-.itinerary-days-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  text-align: left;
-}
-
-@media (min-width: 640px) {
-  .itinerary-days-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-}
-
-.day-schedule-card {
-  padding: 16px 16px;
-  border-radius: 14px;
-  background-color: rgba(245, 239, 230, 0.65);
-  border: 1px solid rgba(209, 197, 180, 0.45);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
-
-@media (min-width: 640px) {
-  .day-schedule-card {
-    padding: 20px 22px;
-  }
-}
-
-.day-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(209, 197, 180, 0.5);
-  padding-bottom: 8px;
-  margin-bottom: 14px;
-}
-
-.day-date-number {
-  font-family: var(--wedding-font-serif);
-  font-size: 26px;
-  font-weight: 600;
-  color: var(--wedding-primary);
-  line-height: 1;
-}
-
-@media (min-width: 640px) {
-  .day-date-number {
-    font-size: 28px;
-  }
-}
-
-.day-month-year {
-  font-family: var(--wedding-font-sans);
-  font-size: 10.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--wedding-secondary);
-}
-
-.day-events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-family: var(--wedding-font-sans);
-}
-
-.day-event-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.event-time-slot {
-  font-size: 13px;
-  color: var(--wedding-secondary);
-  font-weight: 500;
-}
-
-.event-name {
-  font-family: var(--wedding-font-serif);
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--wedding-on-surface);
-  letter-spacing: 0.015em;
-}
-
-@media (min-width: 640px) {
-  .event-name {
-    font-size: 15.5px;
-  }
-}
-
-.main-function-highlight {
-  color: var(--wedding-primary);
-  font-weight: 700;
-}
-
-.event-divider {
-  height: 1px;
-  background-color: rgba(209, 197, 180, 0.4);
-  width: 100%;
-}
-
-.itinerary-blessing-note {
-  font-family: var(--wedding-font-serif);
-  font-style: italic;
-  font-size: clamp(13px, 2.5vw, 15px);
-  color: var(--wedding-secondary);
-  margin: 20px 0 0;
-  line-height: 1.5;
-  text-wrap: balance;
 }
 
 /* 5. Primary Location Button & Calendar Actions */
 .venue-actions-wrapper {
   width: 100%;
+  max-width: 760px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1729,4 +1593,3 @@
   font-weight: 600;
   margin: 0;
 }
-

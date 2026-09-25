@@ -112,136 +112,79 @@ export const VenueCelebrationSection: React.FC = () => {
         </div>
       </div>
 
-      {/* 4. Wedding Celebration Schedule (Itinerary Card) */}
-      <div className="venue-itinerary-container">
-        <div className="venue-itinerary-card">
-          {/* Decorative Sparkle Accent */}
-          <div className="itinerary-sparkle-monogram">
-            <span className="material-symbols-outlined itinerary-sparkle-icon">auto_awesome</span>
-          </div>
+      {/* 4. Structural Insertion Point: Future Scroll-Driven Event Timeline */}
+      <div className="venue-timeline-insertion-point" id="venue-timeline-area" />
 
-          <h3 className="itinerary-card-title">Ceremonial Itinerary</h3>
+      {/* 5. Primary Glowing Champagne-Gold Location Button & Calendar Action */}
+      <div className="venue-actions-wrapper">
+        <a
+          href="https://www.google.com/maps/place/Oodles+Hotel+Chhattarpur/@28.48875,77.184769,17z/data=!3m1!4b1!4m9!3m8!1s0x390d1e11afc66825:0xaacf1c3acf14c0!5m2!4m1!1i2!8m2!3d28.48875!4d77.184769!16s%2Fg%2F11xfjmp3l!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="venue-map-cta-btn"
+          id="see-location-map-btn"
+        >
+          <span className="material-symbols-outlined map-btn-icon">pin_drop</span>
+          <span className="map-btn-text">SEE LOCATION ON THE MAP</span>
+        </a>
 
-          {/* Two-Day Grid */}
-          <div className="itinerary-days-grid">
-            {/* Day 1: 23 November 2026 */}
-            <div className="day-schedule-card">
-              <div className="day-header">
-                <span className="day-date-number">23</span>
-                <span className="day-month-year">NOVEMBER 2026</span>
-              </div>
-
-              <div className="day-events-list">
-                <div className="day-event-row">
-                  <span className="event-time-slot">Morning</span>
-                  <span className="event-name">Shagan</span>
-                </div>
-                <div className="event-divider" />
-                <div className="day-event-row">
-                  <span className="event-time-slot">Evening</span>
-                  <span className="event-name">Mehndi</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Day 2: 24 November 2026 */}
-            <div className="day-schedule-card">
-              <div className="day-header">
-                <span className="day-date-number">24</span>
-                <span className="day-month-year">NOVEMBER 2026</span>
-              </div>
-
-              <div className="day-events-list">
-                <div className="day-event-row">
-                  <span className="event-time-slot">Morning</span>
-                  <span className="event-name">Haldi</span>
-                </div>
-                <div className="event-divider" />
-                <div className="day-event-row">
-                  <span className="event-time-slot">Evening</span>
-                  <span className="event-name main-function-highlight">Main Function</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Family Blessing Note */}
-          <p className="itinerary-blessing-note">
-            “We look forward to sharing these joyous ceremonies with you.”
-          </p>
-        </div>
-
-        {/* 5. Primary Glowing Champagne-Gold Location Button */}
-        <div className="venue-actions-wrapper">
-          <a
-            href="https://www.google.com/maps/place/Oodles+Hotel+Chhattarpur/@28.48875,77.184769,17z/data=!3m1!4b1!4m9!3m8!1s0x390d1e11afc66825:0xaacf1c3acf14c0!5m2!4m1!1i2!8m2!3d28.48875!4d77.184769!16s%2Fg%2F11xfjmp3l!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="venue-map-cta-btn"
-            id="see-location-map-btn"
+        {/* 6. Second Action: Book that date in your calendar */}
+        <div className="calendar-action-container" ref={calRef}>
+          <button
+            type="button"
+            className="calendar-invite-btn"
+            id="calendar-invite-btn"
+            onClick={() => setIsCalOpen((prev) => !prev)}
+            aria-expanded={isCalOpen}
+            aria-haspopup="true"
           >
-            <span className="material-symbols-outlined map-btn-icon">pin_drop</span>
-            <span className="map-btn-text">SEE LOCATION ON THE MAP</span>
-          </a>
+            <span className="material-symbols-outlined cal-btn-icon">calendar_today</span>
+            <span className="cal-btn-text">Book that date in your calendar.</span>
+            <span className="material-symbols-outlined cal-chevron-icon">
+              {isCalOpen ? 'expand_less' : 'expand_more'}
+            </span>
+          </button>
 
-          {/* 6. Second Action: Book that date in your calendar */}
-          <div className="calendar-action-container" ref={calRef}>
-            <button
-              type="button"
-              className="calendar-invite-btn"
-              id="calendar-invite-btn"
-              onClick={() => setIsCalOpen((prev) => !prev)}
-              aria-expanded={isCalOpen}
-              aria-haspopup="true"
-            >
-              <span className="material-symbols-outlined cal-btn-icon">calendar_today</span>
-              <span className="cal-btn-text">Book that date in your calendar.</span>
-              <span className="material-symbols-outlined cal-chevron-icon">
-                {isCalOpen ? 'expand_less' : 'expand_more'}
-              </span>
-            </button>
-
-            {isCalOpen && (
-              <div className="calendar-dropdown-menu" role="menu">
-                <a
-                  href={googleCalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cal-menu-item"
-                  role="menuitem"
-                  onClick={() => setIsCalOpen(false)}
-                >
-                  <span className="material-symbols-outlined cal-item-icon">event</span>
-                  <span>Google Calendar</span>
-                </a>
-                <a
-                  href={icsFileHref}
-                  download="manya-sarthak-wedding.ics"
-                  className="cal-menu-item"
-                  role="menuitem"
-                  onClick={() => setIsCalOpen(false)}
-                >
-                  <span className="material-symbols-outlined cal-item-icon">phone_iphone</span>
-                  <span>Apple Calendar (.ics)</span>
-                </a>
-                <a
-                  href={outlookCalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cal-menu-item"
-                  role="menuitem"
-                  onClick={() => setIsCalOpen(false)}
-                >
-                  <span className="material-symbols-outlined cal-item-icon">mail</span>
-                  <span>Outlook Calendar</span>
-                </a>
-              </div>
-            )}
-          </div>
+          {isCalOpen && (
+            <div className="calendar-dropdown-menu" role="menu">
+              <a
+                href={googleCalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cal-menu-item"
+                role="menuitem"
+                onClick={() => setIsCalOpen(false)}
+              >
+                <span className="material-symbols-outlined cal-item-icon">event</span>
+                <span>Google Calendar</span>
+              </a>
+              <a
+                href={icsFileHref}
+                download="manya-sarthak-wedding.ics"
+                className="cal-menu-item"
+                role="menuitem"
+                onClick={() => setIsCalOpen(false)}
+              >
+                <span className="material-symbols-outlined cal-item-icon">phone_iphone</span>
+                <span>Apple Calendar (.ics)</span>
+              </a>
+              <a
+                href={outlookCalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cal-menu-item"
+                role="menuitem"
+                onClick={() => setIsCalOpen(false)}
+              >
+                <span className="material-symbols-outlined cal-item-icon">mail</span>
+                <span>Outlook Calendar</span>
+              </a>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* 7. Subtle Invitation Monogram Sign-off */}
+      {/* 6. Subtle Invitation Monogram Sign-off */}
       <footer className="venue-footer-signoff">
         <div className="signoff-monogram-row">
           <span className="signoff-rule" />

@@ -17,6 +17,10 @@ interface Petal {
   opacity: number;
   colorType: 'rose' | 'jasmine' | 'marigold';
   isBurst?: boolean;
+  isScratch?: boolean;
+  life?: number;
+  decay?: number;
+  initialOpacity?: number;
 }
 
 interface GlobalPetalLayerProps {
@@ -56,20 +60,20 @@ export const GlobalPetalLayer: React.FC<GlobalPetalLayerProps> = ({ isActive }) 
       const rand = Math.random();
       const depth: 'bg' | 'mid' | 'fg' = rand < 0.35 ? 'bg' : rand < 0.8 ? 'mid' : 'fg';
 
-      let size = 16;
+      let size = 11.2;
       let speedY = 1.3;
       let opacity = 0.75;
 
       if (depth === 'bg') {
-        size = 10 + Math.random() * 5;
+        size = 7 + Math.random() * 3.5;
         speedY = 0.6 + Math.random() * 0.45;
         opacity = 0.35 + Math.random() * 0.2;
       } else if (depth === 'mid') {
-        size = 16 + Math.random() * 6;
+        size = 11.2 + Math.random() * 4.2;
         speedY = 1.1 + Math.random() * 0.6;
         opacity = 0.65 + Math.random() * 0.2;
       } else {
-        size = 23 + Math.random() * 8;
+        size = 16.1 + Math.random() * 5.6;
         speedY = 1.8 + Math.random() * 0.8;
         opacity = 0.85 + Math.random() * 0.15;
       }
@@ -104,7 +108,7 @@ export const GlobalPetalLayer: React.FC<GlobalPetalLayerProps> = ({ isActive }) 
       petalsRef.current.push(createPetal());
     }
 
-    // Additive flourish listener (proportionately reduced by 30%: 30 -> 21 desktop, 18 -> 13 mobile)
+    // Additive flourish listener on full date reveal
     const handleBurst = () => {
       const burstCount = isMobile ? 13 : 21;
       for (let i = 0; i < burstCount; i++) {
@@ -112,7 +116,51 @@ export const GlobalPetalLayer: React.FC<GlobalPetalLayerProps> = ({ isActive }) 
       }
     };
 
+    // Dedicated Scratch Flourish Listener: exactly 4 delicate rose petals per meaningful scratch
+    const handleScratchPetals = (e: Event) => {
+      const customEvent = e as CustomEvent<{ x: number; y: number }>;
+      const originX = customEvent.detail?.x ?? width / 2;
+      const originY = customEvent.detail?.y ?? height / 2;
+
+      // Exactly 4 rose petals only
+      for (let i = 0; i < 4; i++) {
+        // Subtle offset around the active scratch coordinate
+        const angle = (i / 4) * Math.PI * 2 + (Math.random() - 0.5) * 0.6;
+        const radius = 8 + Math.random() * 12;
+        const startX = originX + Math.cos(angle) * radius;
+        const startY = originY + Math.sin(angle) * radius;
+
+        // Very small amount of movement, gently drifting down and outward
+        const driftX = Math.cos(angle) * (0.3 + Math.random() * 0.35);
+        const speedY = 0.65 + Math.random() * 0.45;
+        const size = 7.7 + Math.random() * 2.5;
+        const initialOpacity = 0.85;
+
+        petalsRef.current.push({
+          x: startX,
+          y: startY,
+          depth: 'fg',
+          size,
+          speedY,
+          driftX,
+          swaySpeed: 0.015 + Math.random() * 0.015,
+          swayOffset: Math.random() * Math.PI * 2,
+          angle: Math.random() * Math.PI * 2,
+          angularSpeed: (Math.random() - 0.5) * 0.018,
+          flip: Math.random() * Math.PI,
+          flipSpeed: 0.02 + Math.random() * 0.02,
+          opacity: initialOpacity,
+          initialOpacity,
+          colorType: 'rose', // Pure rose petals only
+          isScratch: true,
+          life: 1.0,
+          decay: 0.009 + Math.random() * 0.004, // Fades away gracefully over ~1.5 - 2s
+        });
+      }
+    };
+
     window.addEventListener('wedding:petal-burst', handleBurst);
+    window.addEventListener('wedding:scratch-petals', handleScratchPetals);
 
     // Render loop
     let lastTime = performance.now();
@@ -143,20 +191,32 @@ export const GlobalPetalLayer: React.FC<GlobalPetalLayerProps> = ({ isActive }) 
         p.x += (p.driftX + lateralSway) * dt;
         p.y += p.speedY * dt;
 
-        // Wrap around horizontally
-        if (p.x < -40) p.x = width + 40;
-        if (p.x > width + 40) p.x = -40;
+        // Custom lifecycle for scratch petals vs ambient petals
+        if (p.isScratch) {
+          p.life = (p.life ?? 1.0) - (p.decay ?? 0.01) * dt;
+          p.opacity = (p.initialOpacity ?? 0.85) * Math.max(0, p.life);
 
-        // Out of bottom boundary check
-        if (p.y > height + 40) {
-          if (p.isBurst) {
-            // Remove burst petals once they leave screen
+          // Once faded away or out of bounds, cleanly remove
+          if (p.life <= 0 || p.y > height + 40) {
             petals.splice(i, 1);
             continue;
-          } else {
-            // Respawn ambient petals gently at top
-            petals[i] = createPetal(-30);
-            continue;
+          }
+        } else {
+          // Wrap around horizontally for ambient petals
+          if (p.x < -40) p.x = width + 40;
+          if (p.x > width + 40) p.x = -40;
+
+          // Out of bottom boundary check
+          if (p.y > height + 40) {
+            if (p.isBurst) {
+              // Remove burst petals once they leave screen
+              petals.splice(i, 1);
+              continue;
+            } else {
+              // Respawn ambient petals gently at top
+              petals[i] = createPetal(-30);
+              continue;
+            }
           }
         }
 
@@ -219,6 +279,7 @@ export const GlobalPetalLayer: React.FC<GlobalPetalLayerProps> = ({ isActive }) 
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('wedding:petal-burst', handleBurst);
+      window.removeEventListener('wedding:scratch-petals', handleScratchPetals);
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
       }
