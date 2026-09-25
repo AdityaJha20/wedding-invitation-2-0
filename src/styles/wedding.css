@@ -548,8 +548,16 @@
   height: auto;
   display: block;
   object-fit: cover;
+  object-position: center 25%;
   aspect-ratio: 16/10;
   transition: transform 0.8s ease;
+}
+
+@media (min-width: 640px) {
+  .couple-artwork-img {
+    aspect-ratio: 16/9;
+    object-position: center 25%;
+  }
 }
 
 .couple-artwork-frame:hover .couple-artwork-img {

@@ -1,15 +1,31 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { OpeningSplitScene } from './components/opening/OpeningSplitScene';
 import { OpeningHandoffOverlay } from './components/wedding/OpeningHandoffOverlay';
 import { GlobalPetalLayer } from './components/wedding/GlobalPetalLayer';
 import { MusicControl } from './components/wedding/MusicControl';
 import { WeddingExperience } from './components/wedding/WeddingExperience';
+import { AdminLogin } from './components/admin/AdminLogin';
+import { AdminDashboard } from './components/admin/AdminDashboard';
 import { weddingAudio } from './utils/audioManager';
 
 export const App: React.FC = () => {
+  const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
   const [isOpeningFinished, setIsOpeningFinished] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [isFullyActive, setIsFullyActive] = useState(false);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigateTo = useCallback((path: string) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+  }, []);
 
   // 1. Approved Opening Animation completes (LOCKED - untouched)
   const handleOpenComplete = useCallback(() => {
@@ -26,6 +42,26 @@ export const App: React.FC = () => {
   const handleTransitionComplete = useCallback(() => {
     setIsFullyActive(true);
   }, []);
+
+  // Isolated Admin Routes
+  if (currentPath === '/admin/login') {
+    return (
+      <AdminLogin
+        onLoginSuccess={() => navigateTo('/admin')}
+        onNavigateHome={() => navigateTo('/')}
+      />
+    );
+  }
+
+  if (currentPath === '/admin') {
+    return (
+      <AdminDashboard
+        onLogout={() => navigateTo('/admin/login')}
+        onRequireLogin={() => navigateTo('/admin/login')}
+        onNavigateHome={() => navigateTo('/')}
+      />
+    );
+  }
 
   return (
     <div className="app-container">

@@ -588,7 +588,7 @@ export const ScratchDateSection: React.FC = () => {
               </div>
               <span className="revealed-save-date">Save The Date</span>
               <h3 className="revealed-wedding-date">24 NOVEMBER 2026</h3>
-              <p className="revealed-couple-names">Manya &amp; Sarthak</p>
+              <p className="revealed-couple-names">Sarthak &amp; Manya</p>
             </div>
 
             {/* INTERACTIVE CANVAS OVERLAY FOR SCRATCHING */}

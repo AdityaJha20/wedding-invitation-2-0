@@ -1,0 +1,403 @@
+/* ==========================================================================
+   Admin Portal Styles — Sarthak & Manya Wedding
+   Ivory & Champagne-Gold Luxury Stationery Aesthetic
+   ========================================================================== */
+
+.admin-viewport {
+  width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #f7f4ee;
+  background-image: radial-gradient(circle at 50% 10%, rgba(223, 190, 136, 0.12), transparent 60%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 64px;
+  box-sizing: border-box;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  color: #2b2520;
+}
+
+/* --------------------------------------------------------------------------
+   1. Admin Login View
+   -------------------------------------------------------------------------- */
+.admin-login-wrapper {
+  margin: auto;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 20px;
+  padding: 36px 28px 30px;
+  box-shadow:
+    0 12px 36px -6px rgba(44, 38, 35, 0.08),
+    0 2px 6px rgba(197, 160, 89, 0.1);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.admin-card::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  border-radius: 15px;
+  pointer-events: none;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.admin-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.admin-ornament-line {
+  width: 24px;
+  height: 1px;
+  background: rgba(197, 160, 89, 0.6);
+}
+
+.admin-ornament-icon {
+  font-size: 10px;
+  color: #775a19;
+}
+
+.admin-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #775a19;
+  margin: 0 0 4px;
+}
+
+.admin-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #231e1a;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #775a19;
+}
+
+.admin-input {
+  width: 100%;
+  background: #faf8f5;
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #231e1a;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.admin-input:focus {
+  background: #ffffff;
+  border-color: rgba(197, 160, 89, 0.9);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18);
+}
+
+.admin-submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #d4af37 0%, #c5a059 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 13px 28px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 6px;
+}
+
+.admin-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(197, 160, 89, 0.45);
+}
+
+.admin-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.admin-error-box {
+  background: rgba(154, 59, 77, 0.08);
+  border: 1px solid rgba(154, 59, 77, 0.25);
+  color: #9a3b4d;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.admin-back-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #775a19;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.admin-back-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   2. Admin Dashboard View
+   -------------------------------------------------------------------------- */
+.admin-dashboard-container {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.admin-dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 16px;
+  padding: 16px 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 18px rgba(44, 38, 35, 0.04);
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+  .admin-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.admin-brand h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #231e1a;
+  margin: 0;
+}
+
+.admin-brand p {
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #775a19;
+  margin: 2px 0 0;
+}
+
+.admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-badge {
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  color: #775a19;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.admin-logout-btn {
+  background: transparent;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #775a19;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-logout-btn:hover {
+  background: rgba(197, 160, 89, 0.12);
+  border-color: #775a19;
+}
+
+/* Wish Cards List */
+.wishes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.wish-item-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 14px rgba(44, 38, 35, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wish-item-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.12);
+  border-color: rgba(197, 160, 89, 0.5);
+}
+
+.wish-item-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+  padding-bottom: 8px;
+}
+
+.wish-guest-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #231e1a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wish-guest-heart {
+  color: #9a3b4d;
+  font-size: 13px;
+}
+
+.wish-submitted-date {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: #7a716c;
+}
+
+.wish-content-text {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #403833;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.admin-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px dashed rgba(197, 160, 89, 0.4);
+  border-radius: 16px;
+}
+
+.admin-empty-icon {
+  font-size: 32px;
+  color: #c5a059;
+  margin-bottom: 12px;
+}
+
+.admin-empty-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #231e1a;
+  margin: 0 0 6px;
+}
+
+.admin-empty-subtitle {
+  font-size: 13px;
+  color: #7a716c;
+  margin: 0;
+}
+
+/* Loading state */
+.admin-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  gap: 14px;
+}
+
+.admin-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid rgba(197, 160, 89, 0.25);
+  border-top-color: #c5a059;
+  border-radius: 50%;
+  animation: adminSpin 0.75s linear infinite;
+}
+
+@keyframes adminSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -20,10 +20,10 @@ export const VenueCelebrationSection: React.FC = () => {
   // Google Calendar URL for 23 Nov 2026 to 24 Nov 2026
   const googleCalUrl =
     'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' +
-    encodeURIComponent('Wedding Celebration of Manya & Sarthak') +
+    encodeURIComponent('Wedding Celebration of Sarthak & Manya') +
     '&dates=20261123T043000Z/20261124T183000Z' +
     '&details=' +
-    encodeURIComponent('Shagan, Mehndi, Haldi & Main Function at Oodles Hotel Chhattarpur') +
+    encodeURIComponent('Shagun, Mehendi, Haldi & Barat at Oodles Hotel Chhattarpur') +
     '&location=' +
     encodeURIComponent('Oodles Hotel Chhattarpur, New Delhi');
 
@@ -31,11 +31,11 @@ export const VenueCelebrationSection: React.FC = () => {
   const icsData = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Manya and Sarthak Wedding//EN',
+    'PRODID:-//Sarthak and Manya Wedding//EN',
     'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
-    'SUMMARY:Wedding of Manya & Sarthak',
-    'DESCRIPTION:Shagan, Mehndi, Haldi & Main Function',
+    'SUMMARY:Wedding of Sarthak & Manya',
+    'DESCRIPTION:Shagun, Mehendi, Haldi & Barat',
     'LOCATION:Oodles Hotel Chhattarpur, New Delhi',
     'DTSTART:20261123T043000Z',
     'DTEND:20261124T183000Z',
@@ -47,10 +47,10 @@ export const VenueCelebrationSection: React.FC = () => {
 
   const outlookCalUrl =
     'https://outlook.live.com/calendar/0/deeplink/compose?subject=' +
-    encodeURIComponent('Wedding of Manya & Sarthak') +
+    encodeURIComponent('Wedding of Sarthak & Manya') +
     '&startdt=2026-11-23T10:00:00&enddt=2026-11-24T23:59:00' +
     '&body=' +
-    encodeURIComponent('Shagan, Mehndi, Haldi & Main Function at Oodles Hotel Chhattarpur') +
+    encodeURIComponent('Shagun, Mehendi, Haldi & Barat at Oodles Hotel Chhattarpur') +
     '&location=' +
     encodeURIComponent('Oodles Hotel Chhattarpur, New Delhi');
 
@@ -160,7 +160,7 @@ export const VenueCelebrationSection: React.FC = () => {
               </a>
               <a
                 href={icsFileHref}
-                download="manya-sarthak-wedding.ics"
+                download="sarthak-manya-wedding.ics"
                 className="cal-menu-item"
                 role="menuitem"
                 onClick={() => setIsCalOpen(false)}
@@ -188,7 +188,7 @@ export const VenueCelebrationSection: React.FC = () => {
       <footer className="venue-footer-signoff">
         <div className="signoff-monogram-row">
           <span className="signoff-rule" />
-          <span className="signoff-monogram">M &amp; S</span>
+          <span className="signoff-monogram">S &amp; M</span>
           <span className="signoff-rule" />
         </div>
         <p className="signoff-blessing">With the blessings of our elders and families</p>

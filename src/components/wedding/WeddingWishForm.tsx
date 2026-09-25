@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import '../../styles/wedding-wish-form.css';
+import { apiClient } from '../../utils/apiClient';
 
 interface WeddingWishFormProps {
   // Optional callback for external integrations
@@ -13,8 +14,10 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
+
+      if (status === 'submitting') return;
 
       const trimmedName = name.trim();
       const trimmedWish = wish.trim();
@@ -27,36 +30,49 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
       setErrorMessage(null);
       setStatus('submitting');
 
-      // Create new wish record
-      const newWishRecord = {
-        name: trimmedName,
-        wish: trimmedWish,
-        date: new Date().toISOString(),
-      };
-
-      // Store in localStorage for permanence
       try {
-        const stored = localStorage.getItem('wedding_wishes_collection');
-        const existing = stored ? JSON.parse(stored) : [];
-        existing.push(newWishRecord);
-        localStorage.setItem('wedding_wishes_collection', JSON.stringify(existing));
-      } catch {
-        // Safe fallback if localStorage is unavailable
+        const response = await apiClient.submitWish(trimmedName, trimmedWish);
+
+        if (!response.success) {
+          setErrorMessage(response.message || 'Unable to submit your wishes. Please try again.');
+          setStatus('idle');
+          return;
+        }
+
+        const newWishRecord = {
+          name: trimmedName,
+          wish: trimmedWish,
+          date: new Date().toISOString(),
+        };
+
+        // Cache locally as an offline resilient backup
+        try {
+          const stored = localStorage.getItem('wedding_wishes_collection');
+          const existing = stored ? JSON.parse(stored) : [];
+          existing.push(newWishRecord);
+          localStorage.setItem('wedding_wishes_collection', JSON.stringify(existing));
+        } catch {
+          // Safe fallback if localStorage is unavailable
+        }
+
+        if (onWishSubmitted) {
+          onWishSubmitted(newWishRecord);
+        }
+
+        // Celebratory petal flourish on submission
+        window.dispatchEvent(new CustomEvent('wedding:petal-burst'));
+
+        // Transition to success state
+        setTimeout(() => {
+          setStatus('success');
+        }, 350);
+      } catch (err) {
+        console.error('Submission error:', err);
+        setErrorMessage('A network error occurred. Please try submitting again.');
+        setStatus('idle');
       }
-
-      if (onWishSubmitted) {
-        onWishSubmitted(newWishRecord);
-      }
-
-      // Celebratory petal flourish on submission
-      window.dispatchEvent(new CustomEvent('wedding:petal-burst'));
-
-      // Transition to success state
-      setTimeout(() => {
-        setStatus('success');
-      }, 450);
     },
-    [name, wish, onWishSubmitted]
+    [name, wish, status, onWishSubmitted]
   );
 
   const handleReset = useCallback(() => {
@@ -84,7 +100,7 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
             <span className="wish-ornament-line" />
           </div>
           <h2 className="wish-main-title">A Little Note for Us</h2>
-          <p className="wish-subtitle">Leave your love &amp; blessings for Manya &amp; Sarthak</p>
+          <p className="wish-subtitle">Leave your love &amp; blessings for Sarthak &amp; Manya</p>
         </header>
 
         {status === 'success' ? (
@@ -97,7 +113,7 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
             <p className="wish-success-message">
               Your love has been added to our little collection of blessings.
             </p>
-            <p className="wish-success-signoff">— Manya &amp; Sarthak</p>
+            <p className="wish-success-signoff">— Sarthak &amp; Manya</p>
 
             <button
               type="button"
@@ -146,7 +162,7 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
                   setWish(e.target.value);
                   if (errorMessage) setErrorMessage(null);
                 }}
-                placeholder="Leave a little love or a blessing for Manya & Sarthak..."
+                placeholder="Leave a little love or a blessing for Sarthak & Manya..."
                 className="wish-textarea"
                 rows={4}
                 required

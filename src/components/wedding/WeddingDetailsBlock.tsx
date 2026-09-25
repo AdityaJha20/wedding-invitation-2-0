@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../styles/wedding-details-block.css';
 
 interface CeremonyMoment {
   id: string;
-  timeOfDay: string;
+  time: string;
   title: string;
   sanskrit: string;
   subtitle: string;
+  icon: string;
 }
 
 interface CelebrationDay {
   date: string;
   dayOfWeek: string;
+  badge?: string;
   events: CeremonyMoment[];
 }
 
@@ -21,44 +23,75 @@ const CELEBRATION_SCHEDULE: CelebrationDay[] = [
     dayOfWeek: 'Monday',
     events: [
       {
-        id: 'shagan',
-        timeOfDay: 'MORNING',
-        title: 'Shagan',
+        id: 'shagun',
+        time: '5:00 PM',
+        title: 'Shagun',
         sanskrit: '॥ शुभ आरंभ ॥',
-        subtitle: 'Sacred Family Blessings',
+        subtitle: 'Sacred Family Blessings & Tilak',
+        icon: 'spa',
       },
       {
-        id: 'mehndi',
-        timeOfDay: 'EVENING',
-        title: 'Mehndi',
-        sanskrit: '॥ मेंहदी उत्सव ॥',
-        subtitle: 'Henna, Melodies & Joy',
+        id: 'mehendi-sangeet',
+        time: '8:30 PM',
+        title: 'Mehendi / Sangeet',
+        sanskrit: '॥ संगीत उत्सव ॥',
+        subtitle: 'Henna, Melodies & Celebration',
+        icon: 'music_note',
+      },
+      {
+        id: 'dinner-day1',
+        time: '9:00 PM',
+        title: 'Dinner',
+        sanskrit: '॥ प्रीतिभोज ॥',
+        subtitle: 'Royal Celebratory Feast',
+        icon: 'restaurant',
       },
     ],
   },
   {
     date: '24 NOVEMBER 2026',
     dayOfWeek: 'Tuesday',
+    badge: 'MAIN EVENT',
     events: [
       {
-        id: 'haldi',
-        timeOfDay: 'MORNING',
-        title: 'Haldi',
-        sanskrit: '॥ हरिद्रा मंगलम् ॥',
-        subtitle: 'Sunlit Turmeric Ritual',
+        id: 'breakfast',
+        time: '9:00 AM',
+        title: 'Breakfast',
+        sanskrit: '॥ प्रातः कलेवा ॥',
+        subtitle: 'Morning Delights & Chai',
+        icon: 'coffee',
       },
       {
-        id: 'main-function',
-        timeOfDay: 'EVENING',
-        title: 'Main Function',
+        id: 'haldi',
+        time: '10:00 AM',
+        title: 'Haldi',
+        sanskrit: '॥ हरिद्रा मंगलम् ॥',
+        subtitle: 'Sunlit Turmeric & Auspicious Rituals',
+        icon: 'flare',
+      },
+      {
+        id: 'lunch',
+        time: '1:00 PM',
+        title: 'Lunch',
+        sanskrit: '॥ आनंद भोजन ॥',
+        subtitle: 'Traditional Midday Feast',
+        icon: 'restaurant',
+      },
+      {
+        id: 'barat',
+        time: '8:00 PM',
+        title: 'Barat',
         sanskrit: '॥ विवाह संस्कार ॥',
-        subtitle: 'The Sacred Seven Vows',
+        subtitle: 'The Grand Procession & Sacred Vows',
+        icon: 'celebration',
       },
     ],
   },
 ];
 
 export const WeddingDetailsBlock: React.FC = () => {
+  const [activeEventId, setActiveEventId] = useState<string>('shagun');
+
   return (
     <section className="wedding-details-section" id="wedding-celebrations" aria-label="Wedding Celebrations Schedule">
       {/* Heirloom Stationery Programme Card */}
@@ -77,52 +110,88 @@ export const WeddingDetailsBlock: React.FC = () => {
             <span className="details-ornament-line" />
           </div>
           <h2 className="details-main-title">The Celebrations</h2>
-          <p className="details-subtitle">Four beautiful moments, one sacred celebration</p>
+          <p className="details-subtitle">A journey of sacred traditions, music &amp; joyful ceremonies</p>
         </header>
 
-        {/* Two-Day 2x2 Ceremonial Moments Layout */}
+        {/* Ceremonial Journey Timeline */}
         <div className="details-days-group">
           {CELEBRATION_SCHEDULE.map((day, dayIndex) => (
-            <React.Fragment key={day.date}>
-              <div className="details-day-row">
-                {/* Date Chapter Header */}
-                <div className="details-day-header">
-                  <span className="details-day-rule" aria-hidden="true" />
+            <div key={day.date} className="details-day-section">
+              {/* Distinct Date Chapter Header */}
+              <div className={`details-day-header ${day.badge ? 'main-event-day' : ''}`}>
+                <span className="details-day-rule" aria-hidden="true" />
+                <div className="details-date-title-wrap">
                   <span className="details-day-date">{day.date}</span>
-                  <span className="details-day-rule reverse" aria-hidden="true" />
+                  {day.badge && (
+                    <span className="details-main-event-badge">
+                      <span className="badge-sparkle">✦</span>
+                      <span>{day.badge}</span>
+                      <span className="badge-sparkle">✦</span>
+                    </span>
+                  )}
                 </div>
-
-                {/* 2-Column Moments Grid */}
-                <div className="details-events-grid">
-                  {/* Subtle Central Column Divider */}
-                  <div className="details-col-divider" aria-hidden="true" />
-
-                  {day.events.map((event) => (
-                    <article key={event.id} className="details-event-item">
-                      <span className="details-time-pill">{event.timeOfDay}</span>
-                      <h3 className="details-event-name">{event.title}</h3>
-                      <p className="details-event-sub">{event.subtitle}</p>
-                    </article>
-                  ))}
-                </div>
+                <span className="details-day-rule reverse" aria-hidden="true" />
               </div>
 
-              {/* Delicate Chapter Divider between Day 1 and Day 2 */}
+              {/* Day Events Sequence */}
+              <div className="details-events-list">
+                {day.events.map((event) => {
+                  const isActive = activeEventId === event.id;
+                  return (
+                    <article
+                      key={event.id}
+                      className={`details-event-card ${isActive ? 'is-active' : ''}`}
+                      onClick={() => setActiveEventId(event.id)}
+                      onMouseEnter={() => setActiveEventId(event.id)}
+                      role="button"
+                      tabIndex={0}
+                      aria-pressed={isActive}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setActiveEventId(event.id);
+                        }
+                      }}
+                    >
+                      {/* Left: Time Badge */}
+                      <div className="event-time-col">
+                        <span className="details-time-pill">{event.time}</span>
+                      </div>
+
+                      {/* Timeline Node Marker */}
+                      <div className="event-marker-col" aria-hidden="true">
+                        <span className="marker-dot" />
+                      </div>
+
+                      {/* Right: Event Information */}
+                      <div className="event-body-col">
+                        <div className="event-title-row">
+                          <h3 className="details-event-name">{event.title}</h3>
+                          <span className="details-sanskrit-tag">{event.sanskrit}</span>
+                        </div>
+                        <p className="details-event-sub">{event.subtitle}</p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+
+              {/* Delicate Chapter Divider between 23 Nov and 24 Nov */}
               {dayIndex === 0 && (
                 <div className="details-chapter-divider" aria-hidden="true">
                   <span className="details-divider-line" />
-                  <span className="details-divider-ornament">✦</span>
+                  <span className="details-divider-symbol">❦</span>
                   <span className="details-divider-line" />
                 </div>
               )}
-            </React.Fragment>
+            </div>
           ))}
         </div>
 
         {/* Footer Micro Sign-off */}
         <footer className="details-footer-accent">
           <span className="details-footer-dot" aria-hidden="true" />
-          <span className="details-footer-text">CEREMONIAL ITINERARY • MANYA &amp; SARTHAK</span>
+          <span className="details-footer-text">CEREMONIAL ITINERARY • SARTHAK &amp; MANYA</span>
           <span className="details-footer-dot" aria-hidden="true" />
         </footer>
       </div>

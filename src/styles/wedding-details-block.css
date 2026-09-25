@@ -1,11 +1,11 @@
 /* ==========================================================================
-   Wedding Details / Celebrations Block — Heirloom Stationery Insert
-   A small, airy printed programme insert between Scratch Date and Venue
-   Mobile-First Architecture: 320px -> 375px -> 390px -> 640px -> 1024px+
+   Wedding Details / Celebrations Timeline — Heirloom Stationery Insert
+   Ceremonial Itinerary for Sarthak & Manya
+   Mobile-First Architecture: 320px -> 360px -> 375px -> 390px -> 430px -> 640px+
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Section Wrapper (Compact Vertical Footprint)
+   1. Section Wrapper
    -------------------------------------------------------------------------- */
 .wedding-details-section {
   width: 100%;
@@ -13,70 +13,70 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px 16px 28px;
+  padding: 16px 12px 28px;
   box-sizing: border-box;
   position: relative;
   z-index: 5;
   background: transparent;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 480px) {
   .wedding-details-section {
-    padding: 20px 24px 36px;
+    padding: 20px 16px 32px;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
   .wedding-details-section {
-    padding: 24px 32px 44px;
+    padding: 24px 24px 40px;
   }
 }
 
 /* --------------------------------------------------------------------------
-   2. Outer Stationery Card (Small Insert Folio)
+   2. Outer Stationery Card (Heirloom Folio)
    -------------------------------------------------------------------------- */
 .wedding-details-card {
   width: 100%;
-  max-width: 560px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(197, 160, 89, 0.38);
   border-radius: 18px;
-  padding: 22px 16px 18px;
+  padding: 22px 14px 18px;
   box-shadow:
-    0 4px 20px -2px rgba(44, 38, 35, 0.05),
-    0 1px 4px rgba(197, 160, 89, 0.08);
+    0 8px 30px -4px rgba(44, 38, 35, 0.06),
+    0 2px 6px rgba(197, 160, 89, 0.1);
   position: relative;
   box-sizing: border-box;
 }
 
 @media (min-width: 480px) {
   .wedding-details-card {
-    padding: 26px 24px 22px;
+    padding: 26px 20px 22px;
     border-radius: 20px;
   }
 }
 
 @media (min-width: 640px) {
   .wedding-details-card {
-    padding: 30px 32px 24px;
+    padding: 32px 30px 26px;
   }
 }
 
-/* Subtle Inset Framing Line */
+/* Subtle Inset Gold Framing Line */
 .wedding-details-card::before {
   content: '';
   position: absolute;
   inset: 5px;
-  border: 1px solid rgba(197, 160, 89, 0.18);
+  border: 1px solid rgba(197, 160, 89, 0.2);
   border-radius: 14px;
   pointer-events: none;
 }
 
 @media (min-width: 480px) {
   .wedding-details-card::before {
-    inset: 6px;
+    inset: 7px;
     border-radius: 15px;
   }
 }
@@ -93,37 +93,37 @@
 .corner-tl {
   top: 9px;
   left: 9px;
-  border-top: 1.5px solid rgba(197, 160, 89, 0.65);
-  border-left: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-top: 1.5px solid rgba(197, 160, 89, 0.7);
+  border-left: 1.5px solid rgba(197, 160, 89, 0.7);
 }
 
 .corner-tr {
   top: 9px;
   right: 9px;
-  border-top: 1.5px solid rgba(197, 160, 89, 0.65);
-  border-right: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-top: 1.5px solid rgba(197, 160, 89, 0.7);
+  border-right: 1.5px solid rgba(197, 160, 89, 0.7);
 }
 
 .corner-bl {
   bottom: 9px;
   left: 9px;
-  border-bottom: 1.5px solid rgba(197, 160, 89, 0.65);
-  border-left: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-bottom: 1.5px solid rgba(197, 160, 89, 0.7);
+  border-left: 1.5px solid rgba(197, 160, 89, 0.7);
 }
 
 .corner-br {
   bottom: 9px;
   right: 9px;
-  border-bottom: 1.5px solid rgba(197, 160, 89, 0.65);
-  border-right: 1.5px solid rgba(197, 160, 89, 0.65);
+  border-bottom: 1.5px solid rgba(197, 160, 89, 0.7);
+  border-right: 1.5px solid rgba(197, 160, 89, 0.7);
 }
 
 /* --------------------------------------------------------------------------
-   3. Card Header (Small, Refined, Unobtrusive)
+   3. Card Header
    -------------------------------------------------------------------------- */
 .details-header {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,12 +134,12 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   opacity: 0.85;
 }
 
 .details-ornament-line {
-  width: 28px;
+  width: 30px;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.6), transparent);
 }
@@ -152,18 +152,18 @@
 
 .details-main-title {
   font-family: var(--wedding-font-serif, 'Playfair Display', serif);
-  font-size: clamp(19px, 3.8vw, 24px);
-  font-weight: 500;
+  font-size: clamp(20px, 4vw, 26px);
+  font-weight: 600;
   color: var(--wedding-on-surface, #231e1a);
-  letter-spacing: 0.04em;
-  margin: 0 0 3px;
+  letter-spacing: 0.03em;
+  margin: 0 0 4px;
   line-height: 1.2;
 }
 
 .details-subtitle {
   font-family: var(--wedding-font-serif, 'Playfair Display', serif);
   font-style: italic;
-  font-size: clamp(12px, 2.2vw, 13.5px);
+  font-size: clamp(12px, 2.5vw, 13.5px);
   color: var(--wedding-secondary, #655d59);
   margin: 0;
   line-height: 1.35;
@@ -171,23 +171,21 @@
 }
 
 /* --------------------------------------------------------------------------
-   4. Two-Day Chapters & 2x2 Events Grid
+   4. Days Groups and Chapter Headers
    -------------------------------------------------------------------------- */
 .details-days-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
 }
 
-.details-day-row {
+.details-day-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
 }
 
-/* Date Chapter Header */
 .details-day-header {
   display: flex;
   align-items: center;
@@ -199,20 +197,28 @@
 
 .details-day-rule {
   flex: 1;
-  max-width: 60px;
+  max-width: 45px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.4));
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.45));
 }
 
 .details-day-rule.reverse {
-  background: linear-gradient(90deg, rgba(197, 160, 89, 0.4), transparent);
+  background: linear-gradient(90deg, rgba(197, 160, 89, 0.45), transparent);
+}
+
+.details-date-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .details-day-date {
   font-family: 'Cinzel', var(--wedding-font-sans), serif;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--wedding-primary, #775a19);
   white-space: nowrap;
@@ -220,53 +226,106 @@
 
 @media (min-width: 480px) {
   .details-day-date {
-    font-size: 11.5px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+  }
+  .details-day-rule {
+    max-width: 65px;
   }
 }
 
-/* 2-Column Balanced Events Grid */
-.details-events-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 14px;
-  row-gap: 8px;
+/* 24 November Main Event Badge */
+.details-main-event-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.16), rgba(245, 239, 230, 0.9));
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: 'Cinzel', var(--wedding-font-sans), serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #775a19;
+  box-shadow: 0 1px 4px rgba(197, 160, 89, 0.12);
+}
+
+.badge-sparkle {
+  font-size: 7px;
+  color: #c5a059;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   5. Interactive Timeline Events List
+   -------------------------------------------------------------------------- */
+.details-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   width: 100%;
   position: relative;
   box-sizing: border-box;
 }
 
-@media (min-width: 480px) {
-  .details-events-grid {
-    column-gap: 22px;
+/* Event Card Row */
+.details-event-card {
+  display: grid;
+  grid-template-columns: 66px 20px 1fr;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  box-sizing: border-box;
+  outline: none;
+}
+
+@media (min-width: 360px) {
+  .details-event-card {
+    grid-template-columns: 72px 22px 1fr;
+    padding: 8px 10px;
   }
 }
 
-/* Subtle Vertical Divider Between Columns */
-.details-col-divider {
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 50%;
-  width: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(197, 160, 89, 0.28) 20%,
-    rgba(197, 160, 89, 0.28) 80%,
-    transparent 100%
-  );
-  pointer-events: none;
+@media (min-width: 480px) {
+  .details-event-card {
+    grid-template-columns: 82px 24px 1fr;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
 }
 
-/* Individual Moment Cell (Airy, Typography-Driven) */
-.details-event-item {
+/* Hover and Active State (Delicate, Wedding-Themed) */
+.details-event-card:hover {
+  background: rgba(248, 244, 238, 0.6);
+  border-color: rgba(197, 160, 89, 0.22);
+}
+
+.details-event-card.is-active {
+  background: linear-gradient(90deg, rgba(255, 252, 247, 0.95), rgba(248, 244, 238, 0.85));
+  border-color: rgba(197, 160, 89, 0.42);
+  box-shadow:
+    0 2px 10px rgba(197, 160, 89, 0.12),
+    0 1px 3px rgba(44, 38, 35, 0.03);
+}
+
+.details-event-card:focus-visible {
+  border-color: var(--wedding-primary, #775a19);
+  box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.35);
+}
+
+/* Column 1: Time Pill */
+.event-time-col {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 4px 6px;
-  box-sizing: border-box;
+  justify-content: flex-start;
 }
 
 .details-time-pill {
@@ -274,32 +333,136 @@
   font-size: 8.5px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
   color: var(--wedding-secondary, #655d59);
-  background: rgba(245, 239, 230, 0.65);
-  border: 1px solid rgba(197, 160, 89, 0.22);
-  padding: 2px 7px;
-  border-radius: 4px;
-  margin-bottom: 6px;
-  line-height: 1.3;
+  background: rgba(245, 239, 230, 0.7);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  padding: 3px 6px;
+  border-radius: 5px;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 480px) {
+  .details-time-pill {
+    font-size: 9.5px;
+    padding: 3px 8px;
+    letter-spacing: 0.1em;
+  }
+}
+
+.details-event-card.is-active .details-time-pill {
+  color: var(--wedding-primary, #775a19);
+  background: rgba(197, 160, 89, 0.18);
+  border-color: rgba(197, 160, 89, 0.55);
+  font-weight: 800;
+}
+
+/* Column 2: Timeline Marker Node */
+.event-marker-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+}
+
+/* Continuous connecting thread */
+.event-marker-col::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: rgba(197, 160, 89, 0.25);
+  pointer-events: none;
+}
+
+.details-events-list .details-event-card:first-child .event-marker-col::before {
+  top: 50%;
+}
+
+.details-events-list .details-event-card:last-child .event-marker-col::before {
+  bottom: 50%;
+}
+
+.marker-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1.5px solid rgba(197, 160, 89, 0.6);
+  position: relative;
+  z-index: 2;
+  transition: all 0.25s ease;
+}
+
+.details-event-card.is-active .marker-dot {
+  background-color: var(--wedding-primary, #775a19);
+  border-color: var(--wedding-primary-container, #c5a059);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.25);
+  transform: scale(1.2);
+}
+
+/* Column 3: Event Body */
+.event-body-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 6px;
+  min-width: 0;
+}
+
+@media (min-width: 480px) {
+  .event-body-col {
+    padding-left: 10px;
+  }
+}
+
+.event-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .details-event-name {
   font-family: var(--wedding-font-serif, 'Playfair Display', serif);
-  font-size: clamp(16px, 3.4vw, 19.5px);
+  font-size: clamp(14px, 3.2vw, 17.5px);
   font-weight: 600;
   color: var(--wedding-on-surface, #231e1a);
-  margin: 0 0 3px;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.details-sanskrit-tag {
+  font-family: var(--wedding-font-serif, 'Playfair Display', serif);
+  font-size: 8.5px;
+  color: var(--wedding-primary, #775a19);
+  opacity: 0.85;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+@media (min-width: 480px) {
+  .details-sanskrit-tag {
+    font-size: 9.5px;
+  }
 }
 
 .details-event-sub {
   font-family: var(--wedding-font-sans, sans-serif);
-  font-size: 11px;
-  line-height: 1.35;
+  font-size: 10.5px;
+  line-height: 1.3;
   color: var(--wedding-secondary, #655d59);
-  margin: 0;
+  margin: 2px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (min-width: 480px) {
@@ -309,39 +472,39 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. Delicate Chapter Divider (Between Day 1 and Day 2)
+   6. Chapter Divider (Between 23 Nov and 24 Nov)
    -------------------------------------------------------------------------- */
 .details-chapter-divider {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  width: 75%;
-  margin: 12px auto 14px;
+  width: 70%;
+  margin: 10px auto 4px;
 }
 
 .details-divider-line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.35), transparent);
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.4), transparent);
 }
 
-.details-divider-ornament {
-  font-size: 9px;
+.details-divider-symbol {
+  font-size: 11px;
   color: var(--wedding-primary-container, #c5a059);
   opacity: 0.85;
   line-height: 1;
 }
 
 /* --------------------------------------------------------------------------
-   6. Footer Micro Sign-off
+   7. Footer Micro Sign-off
    -------------------------------------------------------------------------- */
 .details-footer-accent {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  margin-top: 16px;
+  margin-top: 14px;
   padding-top: 10px;
   border-top: 1px solid rgba(197, 160, 89, 0.16);
 }
@@ -357,7 +520,7 @@
 .details-footer-text {
   font-family: 'Cinzel', var(--wedding-font-sans), serif;
   font-size: 8px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--wedding-secondary, #655d59);
   opacity: 0.75;
