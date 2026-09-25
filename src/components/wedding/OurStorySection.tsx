@@ -351,25 +351,8 @@ export const OurStorySection: React.FC = () => {
                     loading="eager"
                   />
 
-                  {/* Soft Vignette & Sunlit Golden Hour Warmth Overlay */}
-                  <div className="story-vignette-overlay" aria-hidden="true" />
-
                   {/* Inset Ring Hairline */}
                   <div className="story-ring-overlay" aria-hidden="true" />
-
-                  {/* Subtle Script Callout inside the Artwork */}
-                  <div className="story-callout-overlay">
-                    <div className="story-callout-text-group">
-                      <p className="story-callout-script">Two paths. One beautiful story</p>
-                      <p className="story-callout-location">Udaipur • Winter 2026</p>
-                    </div>
-
-                    {/* Heirloom Family Milestone Stamp Badge */}
-                    <div className="story-callout-badge">
-                      <span className="story-badge-pulse-dot" aria-hidden="true" />
-                      <span className="story-badge-label">A Blessed Journey</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
