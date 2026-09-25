@@ -267,11 +267,34 @@ describe('Wedding Invitation API Test Suite', () => {
       expect(res.body.status).toBe('ok');
     });
 
-    it('GET /api/unknown-endpoint → returns 404 with standard JSON', async () => {
+    it('GET /api/unknown-endpoint → returns 404 with standard JSON (not swallowed by SPA)', async () => {
       const res = await request(app).get('/api/unknown-endpoint');
       expect(res.status).toBe(404);
       expect(res.body.success).toBe(false);
       expect(res.body.message).toBe('API route not found.');
+      expect(res.headers['content-type']).toContain('application/json');
+    });
+
+    it('SPA Fallback: GET / returns HTML index', async () => {
+      const res = await request(app).get('/');
+      expect(res.status).toBe(200);
+      expect(res.headers['content-type']).toContain('text/html');
+      expect(res.text).toContain('<!doctype html>');
+    });
+
+    it('SPA Fallback: GET /admin/login returns HTML index', async () => {
+      const res = await request(app).get('/admin/login');
+      expect(res.status).toBe(200);
+      expect(res.headers['content-type']).toContain('text/html');
+      expect(res.text).toContain('<!doctype html>');
+    });
+
+    it('SPA Fallback: GET /admin returns HTML index', async () => {
+      const res = await request(app).get('/admin');
+      expect(res.status).toBe(200);
+      expect(res.headers['content-type']).toContain('text/html');
+      expect(res.text).toContain('<!doctype html>');
     });
   });
 });
+
