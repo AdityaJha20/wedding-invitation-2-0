@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeroSection } from './HeroSection';
+import { OurStorySection } from './OurStorySection';
 import { ScratchDateSection } from './ScratchDateSection';
 import { WeddingDetailsBlock } from './WeddingDetailsBlock';
 import { VenueCelebrationSection } from './VenueCelebrationSection';
@@ -20,7 +21,10 @@ export const WeddingExperience: React.FC<WeddingExperienceProps> = ({ isVisible 
         {/* 1. HERO SECTION */}
         <HeroSection />
 
-        {/* 2. SIGNATURE GOLDEN HEART SCRATCH CARD SECTION */}
+        {/* 2. OUR STORY SECTION (Stitch Screen Reproduction) */}
+        <OurStorySection />
+
+        {/* 3. SIGNATURE GOLDEN HEART SCRATCH CARD SECTION */}
         <ScratchDateSection />
 
         {/* 3. SMALL WEDDING DETAILS / CELEBRATIONS BLOCK */}

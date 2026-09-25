@@ -1,0 +1,1026 @@
+/* ==========================================================================
+   Wedding Invitation 2.0 — Our Story Section Styles
+   Exact Stitch Reproduction (Source of Truth: Screen e317fdf42805410dbb8b964a8fdb854a)
+   "Manya & Sarthak — Our Story Section"
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&display=swap');
+
+:root {
+  --story-bg-cream: #FAF7F2;
+  --story-bg-paper: #FDFBF7;
+  --story-gold-primary: #C5A059;
+  --story-gold-dark: #8C6D32;
+  --story-rose-blush: #E8B4B8;
+  --story-rose-dusty: #C97A85;
+  --story-sage-green: #7D8F76;
+  --story-text-espresso: #2B2118;
+  --story-text-warm-gray: #6B6155;
+  --story-font-serif: 'Playfair Display', Georgia, serif;
+  --story-font-cinzel: 'Cinzel', serif;
+  --story-font-script: 'Alex Brush', cursive;
+  --story-font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Outer Section Wrapper (Flow Placement Between Hero and Scratch Card)
+   -------------------------------------------------------------------------- */
+.our-story-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding: 32px 12px 48px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 2;
+  overflow: visible;
+}
+
+@media (min-width: 480px) {
+  .our-story-wrapper {
+    padding: 40px 16px 56px;
+  }
+}
+
+@media (min-width: 640px) {
+  .our-story-wrapper {
+    padding: 48px 24px 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .our-story-wrapper {
+    padding: 56px 32px 80px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Main Story Card Container (#our-story)
+   -------------------------------------------------------------------------- */
+#our-story,
+.our-story-card {
+  position: relative;
+  width: 100%;
+  max-width: 1152px; /* max-w-6xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 48px 16px;
+  background-color: rgba(253, 251, 247, 0.92); /* bg-[#FDFBF7]/90 */
+  border-radius: 40px; /* rounded-[2.5rem] */
+  box-shadow: 0 20px 60px -15px rgba(78, 54, 34, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: var(--story-font-body);
+  color: var(--story-text-espresso);
+}
+
+@media (min-width: 640px) {
+  #our-story,
+  .our-story-card {
+    padding: 56px 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  #our-story,
+  .our-story-card {
+    padding: 80px 32px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Background Botanical Watercolor Branches (Top-Left & Top-Right)
+   -------------------------------------------------------------------------- */
+.story-botanical-tl {
+  position: absolute;
+  top: -2.5rem;
+  left: -2.5rem;
+  width: 12rem;
+  height: 12rem;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: 0;
+  animation: storyGentleSway 9s ease-in-out infinite alternate;
+  transform-origin: top left;
+}
+
+@media (min-width: 640px) {
+  .story-botanical-tl {
+    width: 16rem;
+    height: 16rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .story-botanical-tl {
+    width: 20rem;
+    height: 20rem;
+  }
+}
+
+.story-botanical-tr {
+  position: absolute;
+  top: -3rem;
+  right: -3rem;
+  width: 13rem;
+  height: 13rem;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: 0;
+  animation: storyGentleSway 11s ease-in-out infinite alternate-reverse;
+  transform-origin: top right;
+}
+
+@media (min-width: 640px) {
+  .story-botanical-tr {
+    width: 18rem;
+    height: 18rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .story-botanical-tr {
+    width: 22rem;
+    height: 22rem;
+  }
+}
+
+.story-botanical-bottom {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18rem;
+  height: 4rem;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+@media (min-width: 640px) {
+  .story-botanical-bottom {
+    width: 24rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Playful Floating Butterflies (SVG Micro-Interactions)
+   -------------------------------------------------------------------------- */
+.story-butterfly-left {
+  position: absolute;
+  top: 32%;
+  left: 4%;
+  z-index: 20;
+  pointer-events: none;
+  animation: storyButterflyFlutter1 7s ease-in-out infinite;
+}
+
+@media (min-width: 640px) {
+  .story-butterfly-left {
+    left: 8%;
+  }
+}
+
+@media (min-width: 768px) {
+  .story-butterfly-left {
+    left: 10%;
+  }
+}
+
+.story-butterfly-right {
+  position: absolute;
+  top: 22%;
+  right: 5%;
+  z-index: 20;
+  pointer-events: none;
+  animation: storyButterflyFlutter2 8.5s ease-in-out infinite alternate-reverse;
+}
+
+@media (min-width: 640px) {
+  .story-butterfly-right {
+    right: 9%;
+  }
+}
+
+@media (min-width: 768px) {
+  .story-butterfly-right {
+    right: 12%;
+  }
+}
+
+.story-butterfly-svg-gold {
+  width: 2rem;
+  height: 2rem;
+  color: #C5A059;
+  filter: drop-shadow(0 2px 4px rgba(197, 160, 89, 0.3));
+  animation: storyWingFlap 0.4s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@media (min-width: 640px) {
+  .story-butterfly-svg-gold {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.story-butterfly-svg-pink {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #C97A85;
+  filter: drop-shadow(0 2px 4px rgba(201, 122, 133, 0.3));
+  animation: storyWingFlap 0.35s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@media (min-width: 640px) {
+  .story-butterfly-svg-pink {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Floating Petal Shower Particles
+   -------------------------------------------------------------------------- */
+.story-petal {
+  position: absolute;
+  pointer-events: none;
+  z-index: 30;
+  border-radius: 9999px;
+}
+
+.story-petal-1 {
+  top: -1rem;
+  left: 22%;
+  width: 1rem;
+  height: 1.5rem;
+  background: linear-gradient(135deg, #FAD4D8, #E8A7B0);
+  filter: blur(0.4px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  animation: storyFloatPetalSlow 10s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.story-petal-2 {
+  top: -1.5rem;
+  left: 68%;
+  width: 1.25rem;
+  height: 1.75rem;
+  background: linear-gradient(135deg, #FFF0F2, #EFA6B2);
+  filter: blur(0.5px);
+  animation: storyFloatPetalMedium 12s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+.story-petal-3 {
+  top: -0.5rem;
+  left: 45%;
+  width: 0.75rem;
+  height: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  filter: blur(0.2px);
+  animation: storyFloatPetalSlow 14s ease-in-out infinite;
+  animation-delay: 5s;
+}
+
+.story-petal-4 {
+  top: -1.25rem;
+  left: 82%;
+  width: 0.75rem;
+  height: 1.25rem;
+  background: linear-gradient(180deg, #F7E7B4, #C5A059);
+  filter: blur(0.3px);
+  opacity: 0.8;
+  animation: storyFloatPetalMedium 11s ease-in-out infinite;
+  animation-delay: 7s;
+}
+
+/* --------------------------------------------------------------------------
+   Section Header: Royal Eyebrow, Main Couple Names & Lineage
+   -------------------------------------------------------------------------- */
+.story-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 42rem; /* max-w-2xl */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .story-header {
+    margin-bottom: 3rem;
+  }
+}
+
+.story-eyebrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.story-eyebrow-line-left {
+  height: 1px;
+  width: 2rem;
+  background: linear-gradient(to right, transparent, #C5A059);
+}
+
+@media (min-width: 640px) {
+  .story-eyebrow-line-left {
+    width: 3.5rem;
+  }
+}
+
+.story-eyebrow-line-right {
+  height: 1px;
+  width: 2rem;
+  background: linear-gradient(to left, transparent, #C5A059);
+}
+
+@media (min-width: 640px) {
+  .story-eyebrow-line-right {
+    width: 3.5rem;
+  }
+}
+
+.story-eyebrow-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--story-font-cinzel);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: #8C6D32;
+  text-transform: uppercase;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .story-eyebrow-text {
+    font-size: 12px;
+  }
+}
+
+.story-star-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #C5A059;
+  flex-shrink: 0;
+}
+
+.story-couple-heading {
+  font-family: var(--story-font-serif);
+  color: #2B2118;
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  margin: 0;
+  font-size: 1.875rem; /* 30px */
+}
+
+@media (min-width: 640px) {
+  .story-couple-heading {
+    font-size: 2.25rem; /* 36px */
+  }
+}
+
+@media (min-width: 768px) {
+  .story-couple-heading {
+    font-size: 3rem; /* 48px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .story-couple-heading {
+    font-size: 3.25rem; /* 52px */
+  }
+}
+
+.story-script-amp {
+  font-family: var(--story-font-script);
+  font-size: 2.25rem; /* 36px */
+  color: #C5A059;
+  font-weight: 400;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  vertical-align: baseline;
+  display: inline-block;
+}
+
+@media (min-width: 640px) {
+  .story-script-amp {
+    font-size: 3rem; /* 48px */
+  }
+}
+
+@media (min-width: 768px) {
+  .story-script-amp {
+    font-size: 3.75rem; /* 60px */
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Family Lineage Columns
+   -------------------------------------------------------------------------- */
+.story-lineage-container {
+  margin-top: 1.5rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.story-lineage-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .story-lineage-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Sarthak's Family Lineage (Left Column) */
+.story-lineage-left {
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .story-lineage-left {
+    text-align: right;
+    padding-right: 1.5rem;
+    border-right: 1px solid rgba(197, 160, 89, 0.3);
+  }
+}
+
+/* Manya's Family Lineage (Right Column) */
+.story-lineage-right {
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .story-lineage-right {
+    text-align: left;
+    padding-left: 1.5rem;
+  }
+}
+
+.story-lineage-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.story-lineage-role {
+  display: block;
+  font-size: 0.75rem;
+  font-family: var(--story-font-serif);
+  font-style: italic;
+  color: rgba(140, 109, 50, 0.85);
+  margin-bottom: 2px;
+}
+
+.story-lineage-parents {
+  font-size: 0.875rem;
+  font-family: var(--story-font-serif);
+  color: #2B2118;
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .story-lineage-parents {
+    font-size: 1rem;
+  }
+}
+
+.story-lineage-grandparents-block {
+  padding-top: 0.25rem;
+}
+
+.story-lineage-grandparents {
+  font-size: 0.75rem;
+  font-family: var(--story-font-serif);
+  color: #6B6155;
+  line-height: 1.35;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .story-lineage-grandparents {
+    font-size: 0.875rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Dominant Centerpiece: The Large Romantic Couple Scene Artwork
+   -------------------------------------------------------------------------- */
+.story-centerpiece {
+  position: relative;
+  z-index: 10;
+  max-width: 56rem; /* max-w-4xl */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Outer Heirloom Handcrafted Arch Frame */
+.story-album-frame {
+  position: relative;
+  padding: 0.75rem;
+  background: linear-gradient(180deg, #FFFDF9 0%, #FAF6EE 50%, #F5EFE3 100%);
+  border-radius: 2rem;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: 0 15px 40px -10px rgba(140, 109, 50, 0.14);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 640px) {
+  .story-album-frame {
+    padding: 1.25rem;
+    border-radius: 2.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .story-album-frame {
+    padding: 1.5rem;
+  }
+}
+
+.story-album-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(140, 109, 50, 0.18), 0 0 0 1px rgba(197, 160, 89, 0.35);
+}
+
+/* Four Corner Gold Filigree Accents */
+.story-filigree-corner {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  pointer-events: none;
+  opacity: 0.7;
+  color: #C5A059;
+}
+
+@media (min-width: 640px) {
+  .story-filigree-corner {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.story-filigree-tl {
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+.story-filigree-tr {
+  top: 0.5rem;
+  right: 0.5rem;
+  transform: rotate(90deg);
+}
+
+.story-filigree-bl {
+  bottom: 0.5rem;
+  left: 0.5rem;
+  transform: rotate(-90deg);
+}
+
+.story-filigree-br {
+  bottom: 0.5rem;
+  right: 0.5rem;
+  transform: rotate(180deg);
+}
+
+@media (min-width: 640px) {
+  .story-filigree-tl {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+  .story-filigree-tr {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+  .story-filigree-bl {
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+  .story-filigree-br {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* Subtle Inner Embossed Inset Border */
+.story-inner-border {
+  position: relative;
+  padding: 0.375rem;
+  border-radius: 1.75rem;
+  border: 1px dashed rgba(197, 160, 89, 0.4);
+  background-color: #FAF7F2;
+}
+
+@media (min-width: 640px) {
+  .story-inner-border {
+    padding: 0.625rem;
+    border-radius: 2.25rem;
+  }
+}
+
+/* Image Container with Scalloped Arched Composition */
+.story-image-canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background-color: #ECE5D8;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 640px) {
+  .story-image-canvas {
+    aspect-ratio: 16 / 9.5;
+    border-radius: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .story-image-canvas {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.story-couple-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: translateZ(0);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.story-album-frame:hover .story-couple-photo {
+  transform: scale(1.025);
+}
+
+/* Soft Vignette & Sunlit Golden Hour Warmth Overlay */
+.story-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(43, 33, 24, 0.5) 0%, rgba(43, 33, 24, 0.15) 30%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Inset Hairline Ring */
+.story-ring-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(197, 160, 89, 0.3);
+  pointer-events: none;
+}
+
+/* Overlay Text Callout inside the Artwork */
+.story-callout-overlay {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  z-index: 10;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .story-callout-overlay {
+    bottom: 1.5rem;
+    left: 2rem;
+    right: 2rem;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.story-callout-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.story-callout-script {
+  font-family: var(--story-font-script);
+  font-size: 1.5rem; /* 24px */
+  color: #FAF7F2;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+  line-height: 1.2;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .story-callout-script {
+    font-size: 1.875rem; /* 30px */
+  }
+}
+
+@media (min-width: 768px) {
+  .story-callout-script {
+    font-size: 2.25rem; /* 36px */
+  }
+}
+
+.story-callout-location {
+  font-family: var(--story-font-cinzel);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: #F5E1A4;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .story-callout-location {
+    font-size: 12px;
+  }
+}
+
+/* Heirloom Family Milestone Stamp Badge */
+.story-callout-badge {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .story-callout-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(253, 251, 247, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    box-shadow: 0 4px 12px rgba(43, 33, 24, 0.12);
+  }
+}
+
+.story-badge-pulse-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #C5A059;
+  animation: storyPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
+}
+
+.story-badge-label {
+  font-family: var(--story-font-cinzel);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #8C6D32;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Poetic Micro-Journey Footnote
+   -------------------------------------------------------------------------- */
+.story-footnote {
+  position: relative;
+  z-index: 10;
+  margin-top: 2rem;
+  text-align: center;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px) {
+  .story-footnote {
+    margin-top: 3rem;
+  }
+}
+
+.story-footnote-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.story-footnote-line-left {
+  height: 1px;
+  width: 3rem;
+  background: linear-gradient(to right, transparent, rgba(197, 160, 89, 0.6));
+}
+
+@media (min-width: 640px) {
+  .story-footnote-line-left {
+    width: 5rem;
+  }
+}
+
+.story-footnote-line-right {
+  height: 1px;
+  width: 3rem;
+  background: linear-gradient(to left, transparent, rgba(197, 160, 89, 0.6));
+}
+
+@media (min-width: 640px) {
+  .story-footnote-line-right {
+    width: 5rem;
+  }
+}
+
+.story-heart-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #C97A85;
+  flex-shrink: 0;
+}
+
+.story-signoff-text {
+  font-family: var(--story-font-cinzel);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: #8C6D32;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (min-width: 640px) {
+  .story-signoff-text {
+    font-size: 14px;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* Transition Dots */
+.story-dots-row {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.7;
+}
+
+.story-dot-rose {
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: #E8B4B8;
+}
+
+.story-dot-gold {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #C5A059;
+}
+
+.story-dot-sage {
+  display: inline-block;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: #7D8F76;
+}
+
+/* --------------------------------------------------------------------------
+   Keyframe Animations (Exact from Stitch)
+   -------------------------------------------------------------------------- */
+@keyframes storyGentleSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.8deg);
+  }
+}
+
+@keyframes storyButterflyFlutter1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate3d(12px, -18px, 0) rotate(8deg) scale(1.04);
+  }
+  50% {
+    transform: translate3d(24px, -6px, 0) rotate(-5deg) scale(0.96);
+  }
+  75% {
+    transform: translate3d(8px, -24px, 0) rotate(6deg) scale(1.02);
+  }
+}
+
+@keyframes storyButterflyFlutter2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate3d(-10px, -16px, 0) rotate(-6deg) scale(1.03);
+  }
+  50% {
+    transform: translate3d(-20px, -4px, 0) rotate(7deg) scale(0.97);
+  }
+  75% {
+    transform: translate3d(-6px, -22px, 0) rotate(-4deg) scale(1.02);
+  }
+}
+
+@keyframes storyWingFlap {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.38);
+  }
+}
+
+@keyframes storyFloatPetalSlow {
+  0% {
+    transform: translate3d(0, -20px, 0) rotate(0deg) scale(0.9);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(45px, 320px, 0) rotate(220deg) scale(1.05);
+    opacity: 0;
+  }
+}
+
+@keyframes storyFloatPetalMedium {
+  0% {
+    transform: translate3d(0, -30px, 0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.9;
+  }
+  75% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(-50px, 380px, 0) rotate(-190deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes storyPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Accessibility / Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .story-botanical-tl,
+  .story-botanical-tr,
+  .story-butterfly-left,
+  .story-butterfly-right,
+  .story-butterfly-svg-gold,
+  .story-butterfly-svg-pink,
+  .story-petal,
+  .story-badge-pulse-dot {
+    animation: none !important;
+  }
+  .story-album-frame,
+  .story-couple-photo {
+    transition: none !important;
+  }
+}

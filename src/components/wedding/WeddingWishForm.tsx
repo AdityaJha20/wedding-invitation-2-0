@@ -23,7 +23,7 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
       const trimmedWish = wish.trim();
 
       if (!trimmedName || !trimmedWish) {
-        setErrorMessage('Please share both your name and your blessing.');
+        setErrorMessage('Please share both your name and your message.');
         return;
       }
 
@@ -34,7 +34,7 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
         const response = await apiClient.submitWish(trimmedName, trimmedWish);
 
         if (!response.success) {
-          setErrorMessage(response.message || 'Unable to submit your wishes. Please try again.');
+          setErrorMessage(response.message || 'Unable to submit your RSVP. Please try again.');
           setStatus('idle');
           return;
         }
@@ -83,9 +83,9 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
   }, []);
 
   return (
-    <section className="wedding-wish-section" id="wedding-wishes" aria-label="Wedding Wishes Guestbook">
+    <section className="wedding-wish-section" id="wedding-wishes" aria-label="Wedding RSVP">
       {/* Heirloom Stationery Keepsake Card */}
-      <div className="wedding-wish-card">
+      <div className="wedding-wish-card" id="rsvp">
         {/* Subtle Decorative Gold Corner Flourishes */}
         <div className="wish-corner corner-tl" aria-hidden="true" />
         <div className="wish-corner corner-tr" aria-hidden="true" />
@@ -99,8 +99,8 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
             <span className="wish-ornament-symbol">❖</span>
             <span className="wish-ornament-line" />
           </div>
-          <h2 className="wish-main-title">A Little Note for Us</h2>
-          <p className="wish-subtitle">Leave your love &amp; blessings for Sarthak &amp; Manya</p>
+          <h2 className="wish-main-title">Mark Your Presence</h2>
+          <p className="wish-subtitle">We would be delighted to celebrate this special day with you</p>
         </header>
 
         {status === 'success' ? (
@@ -111,7 +111,7 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
             </div>
             <h3 className="wish-success-heading">Thank You with All Our Hearts</h3>
             <p className="wish-success-message">
-              Your love has been added to our little collection of blessings.
+              Your response has been received with warmth and joy.
             </p>
             <p className="wish-success-signoff">— Sarthak &amp; Manya</p>
 
@@ -119,9 +119,9 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
               type="button"
               className="wish-reset-btn"
               onClick={handleReset}
-              aria-label="Leave another blessing"
+              aria-label="Submit another response"
             >
-              <span>Write another note</span>
+              <span>Submit another response</span>
             </button>
           </div>
         ) : (
@@ -149,10 +149,10 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
               />
             </div>
 
-            {/* Field 2: Wishes Textarea */}
+            {/* Field 2: Message Textarea */}
             <div className="wish-field-group">
               <label htmlFor="guest-wish" className="wish-label">
-                Your Wishes
+                Your Message
               </label>
               <textarea
                 id="guest-wish"
@@ -162,7 +162,7 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
                   setWish(e.target.value);
                   if (errorMessage) setErrorMessage(null);
                 }}
-                placeholder="Leave a little love or a blessing for Sarthak & Manya..."
+                placeholder="Leave a message for Sarthak & Manya..."
                 className="wish-textarea"
                 rows={4}
                 required
@@ -184,10 +184,10 @@ export const WeddingWishForm: React.FC<WeddingWishFormProps> = ({ onWishSubmitte
                 type="submit"
                 className={`wish-submit-btn ${status === 'submitting' ? 'submitting' : ''}`}
                 disabled={status === 'submitting'}
-                aria-label="Send your wish to the bride and groom"
+                aria-label="RSVP to celebrate with the bride and groom"
               >
                 <span className="wish-btn-text">
-                  {status === 'submitting' ? 'Sending Blessing...' : 'SEND YOUR WISH'}
+                  {status === 'submitting' ? 'Submitting RSVP...' : 'RSVP'}
                 </span>
                 <span className="material-symbols-outlined wish-btn-heart" aria-hidden="true">
                   favorite
