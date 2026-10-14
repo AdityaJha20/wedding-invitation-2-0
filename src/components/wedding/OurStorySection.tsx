@@ -355,7 +355,7 @@ export const OurStorySection: React.FC = () => {
                   {/* Bespoke Couple Video */}
                   <video
                     ref={storyVideoRef}
-                    src="/videos/hero-wedding.mp4"
+                    src="/videos/hero-wedding-20s.mp4"
                     poster="/images/our-story-couple.webp"
                     autoPlay
                     muted
@@ -365,7 +365,7 @@ export const OurStorySection: React.FC = () => {
                     className="story-couple-photo story-couple-video"
                     aria-hidden="true"
                   >
-                    <source src="/videos/hero-wedding.mp4" type="video/mp4" />
+                    <source src="/videos/hero-wedding-20s.mp4" type="video/mp4" />
                   </video>
 
                   {/* Inset Ring Hairline */}
