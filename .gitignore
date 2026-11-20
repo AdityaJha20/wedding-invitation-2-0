@@ -42,3 +42,6 @@ stitch_venue_screen.png
 browser/
 scratchpad_*.md
 .tempmediaStorage/
+
+# Development-only guest photo storage (never commit guest photos)
+.photo-uploads/

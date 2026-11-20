@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import '../../styles/admin.css';
 import { apiClient, WishRecord } from '../../utils/apiClient';
+import { AdminPhotoCollection } from './AdminPhotoCollection';
 
 interface AdminDashboardProps {
   onLogout: () => void;
@@ -16,6 +17,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [wishes, setWishes] = useState<WishRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'wishes' | 'photos'>('wishes');
 
   const fetchWishes = useCallback(async () => {
     setLoading(true);
@@ -77,14 +79,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* Dashboard Header Bar */}
         <header className="admin-dashboard-header">
           <div className="admin-brand">
-            <h1>Guest Blessings</h1>
+            <h1>{activeTab === 'photos' ? 'Photo Collection' : 'Guest Blessings'}</h1>
             <p>Sarthak &amp; Manya Wedding</p>
           </div>
 
           <div className="admin-actions">
-            <span className="admin-badge" aria-label="Total blessings received">
-              {wishes.length} {wishes.length === 1 ? 'Wish' : 'Wishes'}
-            </span>
+            {activeTab === 'wishes' && (
+              <span className="admin-badge" aria-label="Total blessings received">
+                {wishes.length} {wishes.length === 1 ? 'Wish' : 'Wishes'}
+              </span>
+            )}
             <button
               type="button"
               className="admin-logout-btn"
@@ -96,8 +100,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
         </header>
 
+        <nav className="admin-tabs" role="tablist" aria-label="Dashboard sections">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'wishes'}
+            className={`admin-tab ${activeTab === 'wishes' ? 'is-active' : ''}`}
+            onClick={() => setActiveTab('wishes')}
+          >
+            Guest Blessings
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === 'photos'}
+            className={`admin-tab ${activeTab === 'photos' ? 'is-active' : ''}`}
+            onClick={() => setActiveTab('photos')}
+          >
+            Photo Collection
+          </button>
+        </nav>
+
         {/* Content Body */}
-        {loading ? (
+        {activeTab === 'photos' && !loading && !error ? (
+          <AdminPhotoCollection />
+        ) : loading ? (
           <div className="admin-loading-container" role="status">
             <div className="admin-spinner" />
             <p style={{ color: '#775a19', fontSize: 13, fontFamily: 'Cinzel, serif' }}>

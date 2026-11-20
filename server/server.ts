@@ -3,13 +3,26 @@ dotenv.config();
 
 import { app } from './app.js';
 import { connectDB, disconnectDB } from './config/db.js';
+import { clearPhotoTempDir } from './controllers/photoController.js';
+import { getUploadAvailability } from './storage/PhotoStorageProvider.js';
+import { assertJwtSecretConfigured } from './utils/jwt.js';
 
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
+    assertJwtSecretConfigured();
+
     // Connect to MongoDB Atlas
     await connectDB();
+    await clearPhotoTempDir();
+
+    const photoStorage = await getUploadAvailability();
+    console.log(
+      photoStorage.enabled
+        ? `[Photos] Guest uploads OPEN via "${photoStorage.provider}" storage`
+        : `[Photos] Guest uploads CLOSED: ${photoStorage.reason}`
+    );
 
     const server = app.listen(Number(PORT), '0.0.0.0', () => {
       console.log(`\n=================================================`);

@@ -6,6 +6,7 @@ import { MusicControl } from './components/wedding/MusicControl';
 import { WeddingExperience } from './components/wedding/WeddingExperience';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { PhotoUploadPage } from './components/photos/PhotoUploadPage';
 import { weddingAudio } from './utils/audioManager';
 
 export const App: React.FC = () => {
@@ -42,6 +43,11 @@ export const App: React.FC = () => {
   const handleTransitionComplete = useCallback(() => {
     setIsFullyActive(true);
   }, []);
+
+  // Guest photo upload page (opened from the common wedding QR code; skips the opening scene)
+  if (currentPath === '/photos' || currentPath === '/photos/') {
+    return <PhotoUploadPage />;
+  }
 
   // Isolated Admin Routes
   if (currentPath === '/admin/login') {

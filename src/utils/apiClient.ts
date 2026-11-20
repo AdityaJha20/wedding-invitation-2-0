@@ -98,4 +98,70 @@ export const apiClient = {
       method: 'GET',
     });
   },
+
+  // Guest Photo Collection (upload-only; there is no public read endpoint)
+  getPhotoUploadStatus: async (): Promise<ApiResponse> => {
+    return request('/api/photos/status', { method: 'GET' });
+  },
+
+  createPhotoBatch: async (guestName: string): Promise<ApiResponse> => {
+    return request('/api/photos/batches', {
+      method: 'POST',
+      body: JSON.stringify({ guestName }),
+    });
+  },
+
+  /** One photo per request; XHR because fetch cannot report upload progress. */
+  uploadPhoto: (batchId: string, file: File, onProgress: (fraction: number) => void): PhotoUploadHandle => {
+    const xhr = new XMLHttpRequest();
+    const promise = new Promise<PhotoUploadResult>((resolve) => {
+      xhr.open('POST', `${getBaseUrl()}/api/photos/batches/${encodeURIComponent(batchId)}/photos`);
+      xhr.timeout = 10 * 60 * 1000;
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) onProgress(e.loaded / e.total);
+      };
+      xhr.onload = () => {
+        let data: any = null;
+        try {
+          data = JSON.parse(xhr.responseText);
+        } catch {
+          // non-JSON (e.g. proxy error page)
+        }
+        resolve({
+          status: xhr.status,
+          success: xhr.status >= 200 && xhr.status < 300,
+          duplicate: Boolean(data?.duplicate),
+          message: data?.message || `Upload failed (${xhr.status}).`,
+        });
+      };
+      xhr.onerror = () => resolve({ status: 0, success: false, message: 'Connection interrupted.' });
+      xhr.ontimeout = () => resolve({ status: 0, success: false, message: 'Upload timed out.' });
+      xhr.onabort = () => resolve({ status: -1, success: false, message: 'Cancelled.' });
+      const form = new FormData();
+      form.append('photo', file, file.name);
+      xhr.send(form);
+    });
+    return { promise, abort: () => xhr.abort() };
+  },
+
+  // Admin Photo Collection
+  getAdminPhotos: async (): Promise<ApiResponse> => {
+    return request('/api/admin/photos', { method: 'GET' });
+  },
+
+  adminPhotoFileUrl: (id: string, inline = false): string =>
+    `${getBaseUrl()}/api/admin/photos/${encodeURIComponent(id)}/file${inline ? '?inline=1' : ''}`,
 };
+
+export interface PhotoUploadResult {
+  /** HTTP status; 0 = network failure or timeout, -1 = cancelled by the guest. */
+  status: number;
+  success: boolean;
+  duplicate?: boolean;
+  message: string;
+}
+
+export interface PhotoUploadHandle {
+  promise: Promise<PhotoUploadResult>;
+  abort: () => void;
+}

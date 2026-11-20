@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { CookieOptions } from 'express';
 
-const DEFAULT_JWT_SECRET = 'manya-sarthak-wedding-invitation-secure-jwt-secret-key-2026';
+// Local development and tests only; never used when NODE_ENV=production.
+const DEV_ONLY_JWT_SECRET = 'local-development-only-jwt-secret-not-for-production';
 
 export interface AdminTokenPayload {
   id: string;
@@ -9,8 +10,18 @@ export interface AdminTokenPayload {
   role: string;
 }
 
+/** Fails fast in production when JWT_SECRET is missing or blank. Called at server startup. */
+export const assertJwtSecretConfigured = (): void => {
+  if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET?.trim()) {
+    throw new Error('JWT_SECRET environment variable is missing or empty. Refusing to start in production.');
+  }
+};
+
 export const getJwtSecret = (): string => {
-  return process.env.JWT_SECRET || DEFAULT_JWT_SECRET;
+  const secret = process.env.JWT_SECRET?.trim();
+  if (secret) return secret;
+  assertJwtSecretConfigured(); // also guards any request path if startup check was bypassed
+  return DEV_ONLY_JWT_SECRET;
 };
 
 export const signAdminToken = (payload: AdminTokenPayload): string => {
