@@ -270,3 +270,38 @@ Retrieves all submitted guest blessings ordered with newest submissions first. R
   ]
 }
 ```
+
+---
+
+## 9. Guest Photo Collection
+
+Guests scan **one common QR code** that opens `/photos`, enter their name, and upload up to
+**10 photos (JPG, PNG, WEBP, HEIC/HEIF, max 20 MB each)**. There is no login and no public gallery.
+Only administrators can see photos, in **Admin → Photo Collection**, which also generates the QR code
+(PNG, plus SVG for print).
+
+### Storage providers
+Photos are saved through the `PhotoStorageProvider` interface (`server/storage/`). The upload page and
+API don't depend on which provider is active.
+
+| Provider | Use | Production uploads |
+|----------|-----|--------------------|
+| `local` | Development and testing only. Private folder `./.photo-uploads`, never served publicly | **Disabled** |
+| Google Drive | Planned. Add an adapter in `server/storage/` and register it in `getProviderByName` | Enabled once connected and verified |
+
+**Production safety:** with `NODE_ENV=production`, guest uploads stay **closed** unless the configured
+provider is production-safe and ready. Uploads never fall back to local or temporary disk on Render.
+The server logs `[Photos] Guest uploads OPEN/CLOSED` at startup, and the admin tab shows the same status.
+
+### API
+- `GET /api/photos/status`: whether uploads are open, plus limits
+- `POST /api/photos/batches` `{ guestName }`: starts a submission and returns `batchId`
+- `POST /api/photos/batches/:batchId/photos`: multipart field `photo`, one photo per request
+- `GET /api/admin/photos` (admin): totals, uploads by guest, recent photos and failures, storage status
+- `GET /api/admin/photos/:id/file` (admin): streams one photo (`?inline=1` to view)
+
+### Protections
+File type is checked from the file's content (not its name or MIME type). Other protections: 20 MB per
+file, 10 photos per submission (enforced atomically), duplicate detection by SHA-256, per-IP rate limits
+(kept generous for shared venue Wi-Fi), at most 4 uploads processed at once, a 1 GB free-disk floor,
+temp-file cleanup on every request and at startup, and stored files named by random ID.

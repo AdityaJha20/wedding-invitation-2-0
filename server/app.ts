@@ -8,6 +8,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import wishRoutes from './routes/wishRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import photoRoutes from './routes/photoRoutes.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 
 // Load environment variables
@@ -79,6 +80,7 @@ export const createApp = (): Application => {
   // API Routes
   app.use('/api/wishes', wishRoutes);
   app.use('/api/admin', adminRoutes);
+  app.use('/api/photos', photoRoutes);
 
   // Catch-all 404 for unmatched /api routes (ensures /api/* is NEVER swallowed by SPA fallback)
   app.use('/api', notFoundHandler);
